@@ -1,0 +1,1190 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zicai Tan">
+  <meta name="keywords" content="Blogs">
+  
+    <meta name="description" content="本文参考kotlin官方开发手册 本文参考kotlin开发手册翻译版本  基本语法包包名在源文件顶部定义 ： package my.demo  import java.util.*  &#x2F;&#x2F; ...  包名不需要和目录相匹配，源文件可以存在文件系统的任何位置。 函数两个 Int 参数，返回值是 Int 的函数 ： 在kotlin中，fun是函数的标志，是固定使用的。这一点和很多解释语言相似。 fu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1-kotlin基本语法及编码规范">
+<meta property="og:url" content="https://tanzicai.github.io/2021/09/26/1-kotlin%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:site_name" content="TanBlogs">
+<meta property="og:description" content="本文参考kotlin官方开发手册 本文参考kotlin开发手册翻译版本  基本语法包包名在源文件顶部定义 ： package my.demo  import java.util.*  &#x2F;&#x2F; ...  包名不需要和目录相匹配，源文件可以存在文件系统的任何位置。 函数两个 Int 参数，返回值是 Int 的函数 ： 在kotlin中，fun是函数的标志，是固定使用的。这一点和很多解释语言相似。 fu">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-09-26T10:53:32.000Z">
+<meta property="article:modified_time" content="2022-12-20T07:04:56.057Z">
+<meta property="article:author" content="Zicai Tan">
+<meta property="article:tag" content="Kotlin Web">
+<meta property="article:tag" content="kotlin app">
+<meta property="article:tag" content="kotlin ganmes">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>1-kotlin基本语法及编码规范 - TanBlogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tanzicai.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"__","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"always","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Bash"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-250117712-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21492855,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-250117712-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21492855.js');
+      }
+    </script>
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 50vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>TanBlogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="1-kotlin基本语法及编码规范"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Zicai Tan
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-09-26 18:53" pubdate>
+          2021年9月26日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          61 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">1-kotlin基本语法及编码规范</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：14 分钟前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>本文参考kotlin官方<a target="_blank" rel="noopener" href="http://kotlinlang.org/docs/reference/basic-syntax.html">开发手册</a></p>
+<p>本文参考kotlin<a target="_blank" rel="noopener" href="http://kotlinlang.org/docs/reference/basic-syntax.html">开发手册翻译版本</a></p>
+</blockquote>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p>包名在源文件顶部定义 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">package</span> my<span class="token punctuation">.</span>demo
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span><span class="token operator">*</span>
+
+<span class="token comment">// ...</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>包名不需要和目录相匹配，源文件可以存在文件系统的任何位置。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>两个 <code>Int</code> 参数，返回值是 <code>Int</code> 的函数 ：</p>
+<p>在<code>kotlin</code>中，<code>fun</code>是函数的标志，是固定使用的。这一点和很多解释语言相似。</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">sum</span><span class="token punctuation">(</span>a<span class="token operator">:</span> Int<span class="token punctuation">,</span> b<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> a <span class="token operator">+</span> b
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>表达式作为函数体，自动推断返回值类型的函数 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">sum</span><span class="token punctuation">(</span>a<span class="token operator">:</span> Int<span class="token punctuation">,</span> b<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">=</span> a <span class="token operator">+</span> b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+<p>返回无意义值的函数 ：</p>
+<p>在PHP中也有这种以<code>$</code>标定变量的形式。</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">printSum</span><span class="token punctuation">(</span>a<span class="token operator">:</span> Int<span class="token punctuation">,</span> b<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Unit <span class="token punctuation">&#123;</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"sum of </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">a</span></span><span class="token string"> and </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">b</span></span><span class="token string"> is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">a <span class="token operator">+</span> b</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>返回类型是 <code>Unit</code> 时，可省略 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">printSum</span><span class="token punctuation">(</span>a<span class="token operator">:</span> Int<span class="token punctuation">,</span> b<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"sum of </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">a</span></span><span class="token string"> and </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">b</span></span><span class="token string"> is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">a <span class="token operator">+</span> b</span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h2 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h2><p>常量( <code>assign-once</code> <code>read-only</code> ) ：</p>
+<p>使用关键字<code>val</code>标志常量</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">val a: Int &#x3D; 1
+val b &#x3D; 1   &#x2F;&#x2F; 自动推断 Int 类型
+val c: Int  &#x2F;&#x2F; 没有提供初始值，必须声明类型
+c &#x3D; 1       &#x2F;&#x2F; 延迟赋值<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>变量 ：</p>
+<p><code>var</code>可以自动匹配数据类型</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">var x &#x3D; 5 &#x2F;&#x2F; 自动推断 Int 类型
+x +&#x3D; 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>和 Java , JacaScript 一样，Kotlin 也支持行注释和块注释 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">&#x2F;&#x2F; This is an end-of-line comment
+
+&#x2F;* This is a block comment
+   on multiple lines. *&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p><strong>与 Java 不同的是，Kotlin 的块注释可以嵌套。</strong></p>
+<h2 id="使用字符串模板"><a href="#使用字符串模板" class="headerlink" title="使用字符串模板"></a>使用字符串模板</h2><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span>
+<span class="token comment">// simple name in template:</span>
+<span class="token keyword">val</span> s1 <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"a is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">a</span></span><span class="token string">"</span></span>
+
+a <span class="token operator">=</span> <span class="token number">2</span>
+<span class="token comment">// arbitrary expression in template:</span>
+<span class="token keyword">val</span> s2 <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">s1<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"is"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"was"</span></span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">, but now is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">a</span></span><span class="token string">"</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h2 id="使用条件表达式"><a href="#使用条件表达式" class="headerlink" title="使用条件表达式"></a>使用条件表达式</h2><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">maxOf</span><span class="token punctuation">(</span>a<span class="token operator">:</span> Int<span class="token punctuation">,</span> b<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">></span> b<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> a
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> b
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>使用 <code>if</code> 作为表达式 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">maxOf</span><span class="token punctuation">(</span>a<span class="token operator">:</span> Int<span class="token punctuation">,</span> b<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>a <span class="token operator">></span> b<span class="token punctuation">)</span> a <span class="token keyword">else</span> b<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+<h2 id="使用可空变量以及空值检查"><a href="#使用可空变量以及空值检查" class="headerlink" title="使用可空变量以及空值检查"></a>使用可空变量以及空值检查</h2><p>当引用可能为空时必须显式标识这个引用是可空的。</p>
+<p>如果 <code>str</code> 不是数字，则返回空 ：</p>
+<p><code>kotlin</code>可以使用null匹配，<code>java</code>中使用<code>equals</code>进行匹配</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>str<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Int<span class="token operator">?</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>返回可空值的函数 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">printProduct</span><span class="token punctuation">(</span>arg1<span class="token operator">:</span> String<span class="token punctuation">,</span> arg2<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">val</span> x <span class="token operator">=</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>arg1<span class="token punctuation">)</span>
+    <span class="token keyword">val</span> y <span class="token operator">=</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>arg2<span class="token punctuation">)</span>
+
+    <span class="token comment">// 直接使用 `x * y` 可能会报错，因为它们可能持有空值</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">!=</span> <span class="token keyword">null</span> <span class="token operator">&amp;&amp;</span> y <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// x , y 经过空值检查后会自动转化为非空值</span>
+        <span class="token function">println</span><span class="token punctuation">(</span>x <span class="token operator">*</span> y<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"either '</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">arg1</span></span><span class="token string">' or '</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">arg2</span></span><span class="token string">' is not a number"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>    
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>或者</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">// ...</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Wrong number format in '</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span></span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">'"</span></span><span class="token punctuation">)</span>
+      <span class="token keyword">return</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>y <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Wrong number format in '</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span></span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">'"</span></span><span class="token punctuation">)</span>
+      <span class="token keyword">return</span>
+  <span class="token punctuation">&#125;</span>
+
+  <span class="token comment">// x , y经过空值检查后会自动转化为非空值</span>
+  <span class="token function">print</span><span class="token punctuation">(</span>x <span class="token operator">*</span> y<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="使用类型检测和自动类型转换"><a href="#使用类型检测和自动类型转换" class="headerlink" title="使用类型检测和自动类型转换"></a>使用类型检测和自动类型转换</h3><p><code>is</code> 操作符用来检测某个表达式是否<strong>是某个类型的实例</strong>。如果一个不可变的局部变量或者属性值经过类型检测为特定类型后，就没有必要再显示转换 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">getStringLength</span><span class="token punctuation">(</span>obj<span class="token operator">:</span> Any<span class="token punctuation">)</span><span class="token operator">:</span> Int<span class="token operator">?</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token keyword">is</span> String<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// obj 自动转换为 `String` 类型</span>
+        <span class="token keyword">return</span> obj<span class="token punctuation">.</span>length
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">//在类型检查分支外，obj仍然是 `Any` 类型</span>
+    <span class="token keyword">return</span> <span class="token keyword">null</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>or</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">getStringLength</span><span class="token punctuation">(</span>obj<span class="token operator">:</span> Any<span class="token punctuation">)</span><span class="token operator">:</span> Int<span class="token operator">?</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token operator">!</span><span class="token keyword">is</span> String<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token keyword">null</span>
+
+    <span class="token comment">// obj 自动转换为 `String` 类型</span>
+    <span class="token keyword">return</span> obj<span class="token punctuation">.</span>length
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>or even</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">getStringLength</span><span class="token punctuation">(</span>obj<span class="token operator">:</span> Any<span class="token punctuation">)</span><span class="token operator">:</span> Int<span class="token operator">?</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 在`&amp;&amp;`之后的语句中，obj已经自动转化为 `String` 类型</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token keyword">is</span> String <span class="token operator">&amp;&amp;</span> obj<span class="token punctuation">.</span>length <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> obj<span class="token punctuation">.</span>length
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token keyword">null</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="使用for循环"><a href="#使用for循环" class="headerlink" title="使用for循环"></a>使用for循环</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> items <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"apple"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"banana"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"kiwi"</span></span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>item <span class="token keyword">in</span> items<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>or</p>
+<blockquote>
+<p>indices指索引，返回值为Int类型，相当于c语言数组的下标值。</p>
+</blockquote>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> items <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"apple"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"banana"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"kiwi"</span></span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>index <span class="token keyword">in</span> items<span class="token punctuation">.</span>indices<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"item at </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">index</span></span><span class="token string"> is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">items<span class="token punctuation">[</span>index<span class="token punctuation">]</span></span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="使用while循环"><a href="#使用while循环" class="headerlink" title="使用while循环"></a>使用while循环</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> items <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"apple"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"banana"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"kiwi"</span></span><span class="token punctuation">)</span>
+<span class="token keyword">var</span> index <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">while</span> <span class="token punctuation">(</span>index <span class="token operator">&lt;</span> items<span class="token punctuation">.</span>size<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"item at </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">index</span></span><span class="token string"> is </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span><span class="token expression">items<span class="token punctuation">[</span>index<span class="token punctuation">]</span></span><span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    index<span class="token operator">++</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="使用when表达式"><a href="#使用when表达式" class="headerlink" title="使用when表达式"></a>使用when表达式</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">describe</span><span class="token punctuation">(</span>obj<span class="token operator">:</span> Any<span class="token punctuation">)</span><span class="token operator">:</span> String <span class="token operator">=</span>
+<span class="token keyword">when</span> <span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token number">1</span>          <span class="token operator">-></span> <span class="token string-literal singleline"><span class="token string">"One"</span></span>
+    <span class="token string-literal singleline"><span class="token string">"Hello"</span></span>    <span class="token operator">-></span> <span class="token string-literal singleline"><span class="token string">"Greeting"</span></span>
+    <span class="token keyword">is</span> Long    <span class="token operator">-></span> <span class="token string-literal singleline"><span class="token string">"Long"</span></span>
+    <span class="token operator">!</span><span class="token keyword">is</span> String <span class="token operator">-></span> <span class="token string-literal singleline"><span class="token string">"Not a string"</span></span>
+    <span class="token keyword">else</span>       <span class="token operator">-></span> <span class="token string-literal singleline"><span class="token string">"Unknown"</span></span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="使用-ranges"><a href="#使用-ranges" class="headerlink" title="使用 ranges"></a>使用 ranges</h3><p>使用 <code>in</code> 操作符检测某个数字是否在指定范围内 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> x <span class="token operator">=</span> <span class="token number">10</span>
+<span class="token keyword">val</span> y <span class="token operator">=</span> <span class="token number">9</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token keyword">in</span> <span class="token number">1</span><span class="token operator">..</span>y<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"fits in range"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>判断数字是否在指定范围之外 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> list <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"a"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"b"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"c"</span></span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span> <span class="token operator">!</span><span class="token keyword">in</span> <span class="token number">0</span><span class="token operator">..</span>list<span class="token punctuation">.</span>lastIndex<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"-1 is out of range"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>list<span class="token punctuation">.</span>size <span class="token operator">!</span><span class="token keyword">in</span> list<span class="token punctuation">.</span>indices<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"list size is out of valid list indices range too"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>遍历 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">for</span><span class="token punctuation">(</span>x <span class="token keyword">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  <span class="token function">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>over a progression ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">for</span> <span class="token punctuation">(</span>x <span class="token keyword">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">10</span> step <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>x <span class="token keyword">in</span> <span class="token number">9</span> downTo <span class="token number">0</span> step <span class="token number">3</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="使用集合"><a href="#使用集合" class="headerlink" title="使用集合"></a>使用集合</h3><p>迭代一个集合 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">for</span><span class="token punctuation">(</span>name <span class="token keyword">in</span> names<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>使用 <code>in</code> 操作符判断一个对象是否在集合中 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">when</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-literal singleline"><span class="token string">"orange"</span></span> <span class="token keyword">in</span> items <span class="token operator">-></span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"juicy"</span></span><span class="token punctuation">)</span>
+    <span class="token string-literal singleline"><span class="token string">"apple"</span></span> <span class="token keyword">in</span> items <span class="token operator">-></span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"apple is fine too"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>使用 lambda 表达式来过滤（filter）和变换（map）集合 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin">fruits
+<span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">&#123;</span> it<span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"a"</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">.</span><span class="token function">sortedBy</span> <span class="token punctuation">&#123;</span> it <span class="token punctuation">&#125;</span>
+<span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">&#123;</span> it<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">.</span><span class="token function">forEach</span> <span class="token punctuation">&#123;</span> <span class="token function">println</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="创建类和实例-："><a href="#创建类和实例-：" class="headerlink" title="创建类和实例 ："></a>创建类和实例 ：</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> rectangle <span class="token operator">=</span> <span class="token function">Rectangle</span><span class="token punctuation">(</span><span class="token number">5.0</span><span class="token punctuation">,</span> <span class="token number">2.0</span><span class="token punctuation">)</span> <span class="token comment">//no 'new' keyword required</span>
+<span class="token keyword">val</span> triangle <span class="token operator">=</span> <span class="token function">Triangle</span><span class="token punctuation">(</span><span class="token number">3.0</span><span class="token punctuation">,</span> <span class="token number">4.0</span><span class="token punctuation">,</span> <span class="token number">5.0</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+
+<h1 id="习惯写法"><a href="#习惯写法" class="headerlink" title="习惯写法"></a>习惯写法</h1><h2 id="惯用语法"><a href="#惯用语法" class="headerlink" title="惯用语法"></a>惯用语法</h2><p>Kotlin 中的一些常用惯用语法。</p>
+<h3 id="创建数据传输对象-POJOs-x2F-POCOs"><a href="#创建数据传输对象-POJOs-x2F-POCOs" class="headerlink" title="创建数据传输对象 (POJOs&#x2F;POCOs)"></a>创建数据传输对象 (POJOs&#x2F;POCOs)</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">Customer</span><span class="token punctuation">(</span><span class="token keyword">val</span> name<span class="token operator">:</span>String<span class="token punctuation">,</span><span class="token keyword">val</span> email<span class="token operator">:</span>String<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+<p><code>Customer</code> 类具有以下函数 ：</p>
+<ul>
+<li>对所有属性的 getters（对于变量提供 setters 方法）</li>
+<li><code>equals()</code></li>
+<li><code>hashCode()</code></li>
+<li><code>toString()</code></li>
+<li><code>copy()</code></li>
+<li><code>component1()</code> , <code>component2()</code> , … , for all properties</li>
+</ul>
+<h3 id="函数参数默认值"><a href="#函数参数默认值" class="headerlink" title="函数参数默认值"></a>函数参数默认值</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">foo</span><span class="token punctuation">(</span>a<span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> b<span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+<h3 id="过滤-list"><a href="#过滤-list" class="headerlink" title="过滤 list"></a>过滤 list</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> positives <span class="token operator">=</span> list<span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">&#123;</span> x <span class="token operator">-></span> x <span class="token operator">></span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+<p>even shorter ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> positives <span class="token operator">=</span> list<span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">&#123;</span> it <span class="token operator">></span> <span class="token number">0</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+<h3 id="字符串插入"><a href="#字符串插入" class="headerlink" title="字符串插入"></a>字符串插入</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Name </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">name</span></span><span class="token string">"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+<h3 id="类型检查"><a href="#类型检查" class="headerlink" title="类型检查"></a>类型检查</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">when</span> <span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">is</span> Foo <span class="token operator">-></span> <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword">is</span> Bar <span class="token operator">-></span> <span class="token operator">..</span><span class="token punctuation">.</span>
+    <span class="token keyword">else</span>   <span class="token operator">-></span> <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="遍历-map-x2F-键值对集合"><a href="#遍历-map-x2F-键值对集合" class="headerlink" title="遍历 map&#x2F;键值对集合"></a>遍历 map&#x2F;键值对集合</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>k<span class="token punctuation">,</span> v<span class="token punctuation">)</span> <span class="token keyword">in</span> map<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">k</span></span><span class="token string"> -> </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$</span><span class="token expression">v</span></span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p><code>k</code> , <code>v</code> 可以任意命名</p>
+<h3 id="使用-ranges-1"><a href="#使用-ranges-1" class="headerlink" title="使用 ranges"></a>使用 ranges</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>  <span class="token comment">// 闭合 range: 包括100</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">1</span> until <span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span> <span class="token comment">// 半开 range: 不包括100</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>x <span class="token keyword">in</span> <span class="token number">2</span><span class="token operator">..</span><span class="token number">10</span> step <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>x <span class="token keyword">in</span> <span class="token number">10</span> downTo <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token keyword">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="只读-list"><a href="#只读-list" class="headerlink" title="只读 list"></a>只读 list</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> list <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"a"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"b"</span></span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"c"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+<h3 id="只读-map"><a href="#只读-map" class="headerlink" title="只读 map"></a>只读 map</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> map <span class="token operator">=</span> <span class="token function">mapOf</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"a"</span></span> <span class="token keyword">to</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"b"</span></span> <span class="token keyword">to</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string-literal singleline"><span class="token string">"c"</span></span> <span class="token keyword">to</span> <span class="token number">3</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+<h3 id="访问-map"><a href="#访问-map" class="headerlink" title="访问 map"></a>访问 map</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token function">println</span><span class="token punctuation">(</span>map<span class="token punctuation">[</span><span class="token string-literal singleline"><span class="token string">"key"</span></span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+map<span class="token punctuation">[</span><span class="token string-literal singleline"><span class="token string">"key"</span></span><span class="token punctuation">]</span> <span class="token operator">=</span> value<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="懒属性"><a href="#懒属性" class="headerlink" title="懒属性"></a>懒属性</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> p<span class="token operator">:</span> String <span class="token keyword">by</span> lazy <span class="token punctuation">&#123;</span>
+    <span class="token comment">// compute the string</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="扩展函数"><a href="#扩展函数" class="headerlink" title="扩展函数"></a>扩展函数</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> String<span class="token punctuation">.</span><span class="token function">spaceToCamelCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token punctuation">&#125;</span>
+
+<span class="token string-literal singleline"><span class="token string">"Convert this to camelcase"</span></span><span class="token punctuation">.</span><span class="token function">spaceToCamelCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="创建单例"><a href="#创建单例" class="headerlink" title="创建单例"></a>创建单例</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">object</span> Resource<span class="token punctuation">&#123;</span>
+   <span class="token keyword">val</span> name<span class="token operator">=</span><span class="token string-literal singleline"><span class="token string">"Name"</span></span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="if-not-null-简写"><a href="#if-not-null-简写" class="headerlink" title="if not null 简写"></a>if not null 简写</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> files <span class="token operator">=</span> <span class="token function">File</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Test"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">listFiles</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token function">println</span><span class="token punctuation">(</span>files<span class="token operator">?</span><span class="token punctuation">.</span>size<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="if-not-null-and-else-简写"><a href="#if-not-null-and-else-简写" class="headerlink" title="if not null and else 简写"></a>if not null and else 简写</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> files <span class="token operator">=</span> <span class="token function">File</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Test"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">listFiles</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token function">println</span><span class="token punctuation">(</span>files<span class="token operator">?</span><span class="token punctuation">.</span>size <span class="token operator">?:</span> <span class="token string-literal singleline"><span class="token string">"empty"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="为-null-时执行"><a href="#为-null-时执行" class="headerlink" title="为 null 时执行"></a>为 null 时执行</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> <span class="token keyword">data</span> <span class="token operator">=</span> <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token keyword">val</span> email <span class="token operator">=</span> <span class="token keyword">data</span><span class="token punctuation">[</span><span class="token string-literal singleline"><span class="token string">"email"</span></span><span class="token punctuation">]</span> <span class="token operator">?:</span> <span class="token keyword">throw</span> <span class="token function">IllegalStateException</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Email is missing!"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="不为null时执行"><a href="#不为null时执行" class="headerlink" title="不为null时执行"></a>不为null时执行</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> <span class="token keyword">data</span> <span class="token operator">=</span> <span class="token operator">..</span><span class="token punctuation">.</span>
+
+<span class="token keyword">data</span><span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">&#123;</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span> <span class="token comment">// not null 时执行</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="不为-null-时返回非-null-map"><a href="#不为-null-时返回非-null-map" class="headerlink" title="不为 null 时返回非 null map"></a>不为 null 时返回非 null map</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> value <span class="token operator">=</span> <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token keyword">val</span> mapped <span class="token operator">=</span> value<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">let</span> <span class="token punctuation">&#123;</span> <span class="token function">transformValue</span><span class="token punctuation">(</span>it<span class="token punctuation">)</span> <span class="token punctuation">&#125;</span> <span class="token operator">?:</span> defaultValueIfValueIsNull<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="返回-when-表达式"><a href="#返回-when-表达式" class="headerlink" title="返回 when 表达式"></a>返回 when 表达式</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">transform</span><span class="token punctuation">(</span>color<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token keyword">when</span> <span class="token punctuation">(</span>color<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token string-literal singleline"><span class="token string">"Red"</span></span> <span class="token operator">-></span> <span class="token number">0</span>
+        <span class="token string-literal singleline"><span class="token string">"Green"</span></span> <span class="token operator">-></span> <span class="token number">1</span>
+        <span class="token string-literal singleline"><span class="token string">"Blue"</span></span> <span class="token operator">-></span> <span class="token number">2</span>
+        <span class="token keyword">else</span> <span class="token operator">-></span> <span class="token keyword">throw</span> <span class="token function">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Invalid color param value"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="try-x2F-catch-表达式"><a href="#try-x2F-catch-表达式" class="headerlink" title="try&#x2F;catch 表达式"></a>try&#x2F;catch 表达式</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">val</span> result <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span>e<span class="token operator">:</span> ArithmeticException<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token function">IllegalStateException</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token comment">// Working with result</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="if-表达式"><a href="#if-表达式" class="headerlink" title="if 表达式"></a>if 表达式</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">foo</span><span class="token punctuation">(</span>param<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">val</span> result <span class="token operator">=</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>param <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token string-literal singleline"><span class="token string">"one"</span></span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>param <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token string-literal singleline"><span class="token string">"two"</span></span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token string-literal singleline"><span class="token string">"three"</span></span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="Builder-style-usage-of-methods-that-return-Unit"><a href="#Builder-style-usage-of-methods-that-return-Unit" class="headerlink" title="Builder-style usage of methods that return Unit"></a>Builder-style usage of methods that return Unit</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">arrayOfMinusOnes</span><span class="token punctuation">(</span>size<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> IntArray <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token function">IntArray</span><span class="token punctuation">(</span>size<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">apply</span> <span class="token punctuation">&#123;</span> <span class="token function">fill</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="单一表达式函数"><a href="#单一表达式函数" class="headerlink" title="单一表达式函数"></a>单一表达式函数</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">theAnswer</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">42</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+<p>等价于</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">theAnswer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token number">42</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>可以和其他习惯用法有效结合，简化代码，例如when表达式 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">transform</span><span class="token punctuation">(</span>color<span class="token operator">:</span> String<span class="token punctuation">)</span><span class="token operator">:</span> Int <span class="token operator">=</span> <span class="token keyword">when</span> <span class="token punctuation">(</span>color<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token string-literal singleline"><span class="token string">"Red"</span></span> <span class="token operator">-></span> <span class="token number">0</span>
+    <span class="token string-literal singleline"><span class="token string">"Green"</span></span> <span class="token operator">-></span> <span class="token number">1</span>
+    <span class="token string-literal singleline"><span class="token string">"Blue"</span></span> <span class="token operator">-></span> <span class="token number">2</span>
+    <span class="token keyword">else</span> <span class="token operator">-></span> <span class="token keyword">throw</span> <span class="token function">IllegalArgumentException</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"Invalid color param value"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="使用-with-调用一个对象的多个方法"><a href="#使用-with-调用一个对象的多个方法" class="headerlink" title="使用 with 调用一个对象的多个方法"></a>使用 with 调用一个对象的多个方法</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">class</span> Turtle <span class="token punctuation">&#123;</span>
+    <span class="token keyword">fun</span> <span class="token function">penDown</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">fun</span> <span class="token function">penUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">fun</span> <span class="token function">turn</span><span class="token punctuation">(</span>degrees<span class="token operator">:</span> Double<span class="token punctuation">)</span>
+    <span class="token keyword">fun</span> <span class="token function">forward</span><span class="token punctuation">(</span>pixels<span class="token operator">:</span> Double<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">val</span> myTurtle <span class="token operator">=</span> <span class="token function">Turtle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">with</span><span class="token punctuation">(</span>myTurtle<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//draw a 100 pix square</span>
+    <span class="token function">penDown</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>i <span class="token keyword">in</span> <span class="token number">1</span><span class="token operator">..</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">forward</span><span class="token punctuation">(</span><span class="token number">100.0</span><span class="token punctuation">)</span>
+        <span class="token function">turn</span><span class="token punctuation">(</span><span class="token number">90.0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">penUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="Java-7’s-try-with-resources"><a href="#Java-7’s-try-with-resources" class="headerlink" title="Java 7’s try with resources"></a>Java 7’s try with resources</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> stream <span class="token operator">=</span> Files<span class="token punctuation">.</span><span class="token function">newInputStream</span><span class="token punctuation">(</span>Paths<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"/some/file.txt"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+stream<span class="token punctuation">.</span><span class="token function">buffered</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">reader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">use</span> <span class="token punctuation">&#123;</span> reader <span class="token operator">-></span>
+    <span class="token function">println</span><span class="token punctuation">(</span>reader<span class="token punctuation">.</span><span class="token function">readText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="需要泛型类型信息的泛型函数的简便形式"><a href="#需要泛型类型信息的泛型函数的简便形式" class="headerlink" title="需要泛型类型信息的泛型函数的简便形式"></a>需要泛型类型信息的泛型函数的简便形式</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token comment">//  public final class Gson &#123;</span>
+<span class="token comment">//     ...</span>
+<span class="token comment">//     public &lt;T> T fromJson(JsonElement json, Class&lt;T> classOfT) throws JsonSyntaxException &#123;</span>
+<span class="token comment">//     ...</span>
+
+<span class="token keyword">inline</span> <span class="token keyword">fun</span> <span class="token operator">&lt;</span><span class="token keyword">reified</span> T<span class="token operator">:</span> Any<span class="token operator">></span> Gson<span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>json<span class="token punctuation">)</span><span class="token operator">:</span> T <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fromJson</span><span class="token punctuation">(</span>json<span class="token punctuation">,</span> T<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="使用可空-Boolean-值"><a href="#使用可空-Boolean-值" class="headerlink" title="使用可空 Boolean 值"></a>使用可空 Boolean 值</h3><figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">val</span> b<span class="token operator">:</span> Boolean<span class="token operator">?</span> <span class="token operator">=</span> <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>b <span class="token operator">==</span> <span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// b为false  或者 null</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h1 id="编码规范"><a href="#编码规范" class="headerlink" title="编码规范"></a>编码规范</h1><p>包含了 Kotlin 语言当前代码风格。</p>
+<h3 id="命名风格"><a href="#命名风格" class="headerlink" title="命名风格"></a>命名风格</h3><p>如有不确定，默认使用 Java 的编码风格，例如 ：</p>
+<ul>
+<li>使用驼峰命名法（命名避免使用下划线）</li>
+<li>类型名称首字母大写</li>
+<li>方法和属性名首字母小写</li>
+<li>缩进使用4个空格</li>
+<li>公共函数需要写文档，以便在Kotlin Doc中查看</li>
+</ul>
+<h3 id="冒号"><a href="#冒号" class="headerlink" title="冒号"></a>冒号</h3><p>类型和父类型之间的冒号前需要有空格，实例和类型之间的冒号前不需要空格 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">interface</span> Foo<span class="token operator">&lt;</span><span class="token keyword">out</span> T <span class="token operator">:</span> Any<span class="token operator">></span> <span class="token operator">:</span> Bar<span class="token punctuation">&#123;</span>
+    <span class="token keyword">fun</span> <span class="token function">foo</span><span class="token punctuation">(</span>a<span class="token operator">:</span> Int<span class="token punctuation">)</span><span class="token operator">:</span> T
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="Lambdas"><a href="#Lambdas" class="headerlink" title="Lambdas"></a>Lambdas</h3><p>在 lambda 表达式中，花括号附近需要使用空格，分离函数体中参数和表达式的箭头两侧需要空格，尽可能把表达式写在圆括号外。</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin">list<span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">&#123;</span> it <span class="token operator">></span> <span class="token number">10</span> <span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">map</span> <span class="token punctuation">&#123;</span> element <span class="token operator">-></span> element <span class="token operator">*</span> <span class="token number">2</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+
+<p>在简短非嵌套的 lambda 表达式中，通常建议不要显示声明参数，而使用 <code>it</code> 代替。反之，在嵌套的Lambdas表达式中，总是应该显式声明属性。</p>
+<h3 id="类头格式化"><a href="#类头格式化" class="headerlink" title="类头格式化"></a>类头格式化</h3><p>仅有几个参数的类可以缩写为一行代码 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">class</span> <span class="token function">Person</span><span class="token punctuation">(</span>id<span class="token operator">:</span> Int<span class="token punctuation">,</span> name<span class="token operator">:</span> String<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+<p>头很长的类需要进行格式化。每一个主构造器参数单独一行并缩进，右括号也需单独一行。如果我们使用继承，父类构造器的调用或者实现的接口列表应和右括号处于同一行 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">class</span> <span class="token function">Person</span><span class="token punctuation">(</span>
+    id<span class="token operator">:</span> Int<span class="token punctuation">,</span>
+    name<span class="token operator">:</span> String<span class="token punctuation">,</span>
+    surname<span class="token operator">:</span> String
+<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Human</span><span class="token punctuation">(</span>id<span class="token punctuation">,</span> name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// ...</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="Unit"><a href="#Unit" class="headerlink" title="Unit"></a>Unit</h3><p>如果一个函数返回 <code>Unit</code> ，应该被省略 ：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">// ": Unit" is omitted here</span>
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="函数-vs-属性"><a href="#函数-vs-属性" class="headerlink" title="函数 vs 属性"></a>函数 vs 属性</h3><p>某些情况下无参函数和只读属性是可以互换的。尽管语义上相似，但是在具体取舍上还是有格式上的规范的。</p>
+<p>底层算法更偏向于属性 ：</p>
+<ul>
+<li>不会抛出异常</li>
+<li><code>O(1)</code> 复杂度</li>
+<li>计算廉价 (或者第一次运行时进行缓存)</li>
+<li>多次调用返回相同的结果</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/kotlin/" class="category-chain-item">kotlin</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Kotlin-Web/">#Kotlin Web</a>
+      
+        <a href="/tags/kotlin-app/">#kotlin app</a>
+      
+        <a href="/tags/kotlin-ganmes/">#kotlin ganmes</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>1-kotlin基本语法及编码规范</div>
+      <div>https://tanzicai.github.io/2021/09/26/1-kotlin基本语法及编码规范/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zicai Tan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年9月26日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="ND - 禁止演绎">
+                    <i class="iconfont icon-nd"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/28/2-kotlin%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B%E5%92%8C%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" title="2-kotlin基本流程和流程控制">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2-kotlin基本流程和流程控制</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/26/%E5%88%9D%E8%AF%86kotlin/" title="初识kotlin">
+                        <span class="hidden-mobile">初识kotlin</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://tanzicai.github.io/" target="_blank" rel="nofollow noopener"><span>TanBlogs</span></a> <i class="iconfont icon-love"></i> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,819 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zicai Tan">
+  <meta name="keywords" content="Blogs">
+  
+    <meta name="description" content="初识kotlin2021年4月SlashData 公司通过调查来自155个国家的19,000多名受访者，发布《开发者国家排名》第20版，在报告中估计，截至2021年第一季度，有2430万活跃的软件开发者。   以百分比计算，增长最快的语言社区是Kotlin。事实上，这是两个社区中的一个，另一个是Rust，在过去三年中增长了两倍多，从2017年第四季度的110万开发商增长到2021年第一季度的260">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识kotlin">
+<meta property="og:url" content="https://tanzicai.github.io/2021/09/26/%E5%88%9D%E8%AF%86kotlin/index.html">
+<meta property="og:site_name" content="TanBlogs">
+<meta property="og:description" content="初识kotlin2021年4月SlashData 公司通过调查来自155个国家的19,000多名受访者，发布《开发者国家排名》第20版，在报告中估计，截至2021年第一季度，有2430万活跃的软件开发者。   以百分比计算，增长最快的语言社区是Kotlin。事实上，这是两个社区中的一个，另一个是Rust，在过去三年中增长了两倍多，从2017年第四季度的110万开发商增长到2021年第一季度的260">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210926174735.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210926174829.png">
+<meta property="article:published_time" content="2021-09-26T09:40:57.000Z">
+<meta property="article:modified_time" content="2022-12-20T07:04:57.096Z">
+<meta property="article:author" content="Zicai Tan">
+<meta property="article:tag" content="Kotlin Web">
+<meta property="article:tag" content="kotlin app">
+<meta property="article:tag" content="kotlin ganmes">
+<meta property="article:tag" content="全栈">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210926174735.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>初识kotlin - TanBlogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tanzicai.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"__","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"always","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Bash"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-250117712-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21492855,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-250117712-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21492855.js');
+      }
+    </script>
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 50vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>TanBlogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="初识kotlin"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Zicai Tan
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-09-26 17:40" pubdate>
+          2021年9月26日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          35 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">初识kotlin</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：14 分钟前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="初识kotlin"><a href="#初识kotlin" class="headerlink" title="初识kotlin"></a>初识kotlin</h1><p>2021年4月SlashData 公司通过调查来自155个国家的19,000多名受访者，发布《开发者国家排名》第20版，在报告中估计，截至2021年第一季度，有2430万活跃的软件开发者。</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210926174735.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210926174829.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>以百分比计算，增长最快的语言社区是Kotlin。事实上，这是两个社区中的一个，另一个是Rust，在过去三年中增长了两倍多，从2017年第四季度的110万开发商增长到2021年第一季度的260万开发商。这一点从Kotlin的排名中也非常明显。</p>
+<p>在这段时间里，Kotlin的排名从第11位上升到第8位——这一趋势主要归功于谷歌决定将Kotlin作为Android开发的首选语言。</p>
+<p>即便如此，Kotlin要赶上移动开发的主流语言Java还有很长的路要走；目前，用Java构建应用程序的移动开发人员数量是Kotlin的两倍。</p>
+<p>近段时间看到了DsoMusic开源音乐软件项目，从项目中看到了简洁的语法，强大的函数式编程等等思想，所以这段时间想学习一下Kotlin。</p>
+<h1 id="Kotlin简介"><a href="#Kotlin简介" class="headerlink" title="Kotlin简介"></a>Kotlin简介</h1><h2 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h2><p>Kotlin是由JetBrains开发的针对JVM、Android和浏览器的静态编程语言，目前，在Apache组织的许可下已经开源。使用Kotlin，开发者可以很方便地开发移动Android应用、服务器程序和JavaScript程序。Kotlin可以将代码编译成Java字节码，也可以编译成JavaScript，方便在没有JVM的设备上运行。</p>
+<p>Kotlin来源于一个岛屿的名字，全称是Kotlin Island，是英语【科特林岛】之意，这个小岛位于俄罗斯的圣彼得堡附近。之所以要命名为Kotlin，是因为Kotlin的主要开发工作就是由位于圣彼得堡分公司团队完成的。</p>
+<p>在纯命令式编程时代，Sun公司创造了Java和标准库，但一直以来Sun都没有为Java提供一款好用的IDE。在这样的局面下，IBM适时地推出了一款名为Eclipse的IDE，成为对抗Sun公司的利器。</p>
+<p>近十几年来，Eclipse凭借着开源和可扩展平台(OSGi)，战胜了一个又一个对手(JBuilder、NetBeans等)，奠定了Java标准开发环境的地位。然而，就像所有成功的产品一样，Eclipse一路荣光走来的同时也遇到了一系列的问题。所谓船大调头难，近年来，在JetBrains公司一系列产品的冲击下，Eclipse的市场份额正在慢慢下降。</p>
+<p>作为目前广受欢迎的IDE提供商，JetBrains向开发者提供主流的软件开发环境：IntelliJ IDEA、WebStorm、PyCharm等，这些IDE几乎覆盖了目前主流的编程语言。</p>
+<p>在开发Kotlin之前，JetBrains团队一直使用Java来创建他们的IDE以及使用Java进行业务逻辑开发。之所以开发Kotlin，是因为JetBrains 的工程师们在使用Java开发应用程序的过程中，发现了大量的问题。为了提升开发效率以及解决使用Java开发带来的问题，在借鉴了Scala、Groovy等语言后，他们决定开发一款致力于解决Java问题的编程语言Kotlin。</p>
+<p>JetBrains深谙开发者的需求和痛处，在孜孜不倦地为开发者提供最实用、最高效的IDE的同时，也为开发者提供全新的编程语言以解决目前的技术问题。</p>
+<h2 id="发展"><a href="#发展" class="headerlink" title="发展"></a>发展</h2><p>作为一门全新的编程语言，从项目创建到目前的1.2版本，Kotlin共经历了六年的发展。其发展历史大致如下。</p>
+<ul>
+<li>2010年，JetBrains着手开发Kotlin项目。</li>
+<li>2011年7月，JetBrains发布Kotlin项目。</li>
+<li>2012年2月，JetBrains在Apache 2许可证下开源Kotlin项目源码。</li>
+<li>2016年2月，JetBrains发布第一个稳定版本Kotlin 1.0，并许诺保持向后兼容。</li>
+<li>2017年3月，Kotlin 1.1版本发布，正式支持JavaScript，并新增了诸多新功能和特性。</li>
+<li>2017年5月，Google I&#x2F;O大会上，Google官方确定支持Kotlin语言。</li>
+<li>2017年11月，Kotlin 1.1.5发布，相比Kotlin1.0版本，Kotlin有关的代码数目从210万行飞升到1000多万行，对外提供的API也越来越多，使用场景也越来越多。</li>
+<li>2017年12月，Kotlin 1.2版本发布，除了性能上的明显提升外，1.2版本最重要的特性就是增加了多平台代码重用的能力。</li>
+</ul>
+<h2 id="使用理由"><a href="#使用理由" class="headerlink" title="使用理由"></a>使用理由</h2><p>如今，在软件开发领域，除了现在比较热门的人工智能技术和大数据技术之外，移动开发依然是受到大家关注的领域分支，而移动开发最重要的一门技术就是Android开发。Java作为Android开发的官方标准语言，其语法的设计思想还停留在纯命令式语言时代，在函数式语言的大背景下，Java显得有点落伍。虽然随着Java 8和Java 9版本的发布，Java也在向函数式语言靠近，但是Java8和Java9的市场份额并不高，好多的项目还停留在Java 6的时代。特别是对于Android开发者来说，想体验函数式编程的优势似乎太过遥远。所以，使用Kotlin成为最佳的选择。</p>
+<p>作为一款明星语言，在被Android官方宣布为支持语言之前，Kotlin早已是Android开发中的热门话题了，很多开源的项目都使用用Kotlin开发。也正是基于这些原因，在今年的Google I&#x2F;O大会上，Google将Kotlin列为Android开发的官方支持语言。在最近TIOBE的热门编程语言排行榜中，一度进入编程语言前50名，在Github上也获得了超过19K的Star。相信随着Kotlin版本的持续发布和性能的优化，Kotlin一定会走的更远。</p>
+<p>在创造Kotlin语言的过程中，Kotlin从不少编程语言那里获得灵感，比如 Java、Scala、Groovy，可以说是博采众长。使用Kotlin编写的代码，不仅编译运行速度快，而且实现相同的功能代码量远远小于Java的实现。</p>
+<p>使用Kotlin主要有以下优势：</p>
+<h3 id="跨平台开发能力"><a href="#跨平台开发能力" class="headerlink" title="跨平台开发能力"></a><strong>跨平台开发能力</strong></h3><p>因为Kotlin是基于JVM开发的，所以它同时具备了Android 开发、Web浏览器开发、原生Native开发的能力。在原生Native开发方面，目前Kotlin官方在Github上开源了Native的源码(Github地址：<a href="https://link.zhihu.com/?target=https://github.com/JetBrains/">https://github.com/JetBrains/</a></p>
+<p>kotlin-native)。在Web开发方面，Kotlin可以结合Spring框架使用，也可以编译生成JavaScript模块，方便在一些JavaScript的虚拟机上编译运行。</p>
+<h3 id="开源"><a href="#开源" class="headerlink" title="开源"></a><strong>开源</strong></h3><p>20世纪80年代，自由软件运动拉开序幕，开源软件为软件行业的快速发展提供了源源不断的动力。众人拾柴火焰高，对于一门新技术、新语言，开源可以更快速地发现Bug，从而利用开源的力量更快的推动新技术的发展。在开源领域方面，Java就是一个好例子，从语言标准，到Core API、虚拟机、开发者工具，这些都能找到开放的影子。</p>
+<h3 id="100-兼容Java"><a href="#100-兼容Java" class="headerlink" title="100%兼容Java"></a><strong>100%兼容Java</strong></h3><p>Kotlin能够和Java达到100%互通，也就是说，使用Kotlin依旧可以调用 Java已有的代码或库，也可以同时使用Java和Kotlin来混合编写代码。同时，为了方便项目的过渡，JetBrains提供的开发工具可以很简单的实现Java代码到Kotlin的转换。</p>
+<h3 id="空指针安全"><a href="#空指针安全" class="headerlink" title="空指针安全"></a><strong>空指针安全</strong></h3><p>在使用Java编程的过程中，大家聊得最多的话题莫过于如何避免空指针异常(NullPointerException)。针对空指针问题，Kotlin有专门的语法来避免空指针问题。</p>
+<h3 id="语言简洁，学习成本低"><a href="#语言简洁，学习成本低" class="headerlink" title="语言简洁，学习成本低"></a><strong>语言简洁，学习成本低</strong></h3><p>Kotlin语法简洁直观，看上去非常像Scala，但更简单易学。同时，Kotlin使用了大量的语法糖，使得代码更加简洁。Kotlin并不遵循特定的编程规范，它借鉴了函数式风格和面向对象风格的诸多优点。</p>
+<h3 id="支持Lambda表达式"><a href="#支持Lambda表达式" class="headerlink" title="支持Lambda表达式"></a><strong>支持Lambda表达式</strong></h3><p>函数式编程是软件技术的发展方向，而Lambda是函数式编程最基础的内容，因此，在最近的Java 8版本中，Java加入Lambda表达式本身是符合技术发展方向的。引入Lambda，最直观的一个改进是，不用再写大量的匿名内部类。事实上，还有更多由于函数式编程本身特性带来的性能。比如，代码的可读性会更好、高阶函数引入了函数组合的概念等。</p>
+<p>除此之外，因为Lambda的引入，集合操作也得到了极大的改善。比如，引入stream API，把map、reduce、filter这样的基本函数式编程的概念与Java集合结合起来。在大多数情况下，Java程序员在处理集合时，可以告别繁杂的for、while、if等逻辑语句。</p>
+<p>不过，使用Lambda表达式并非只有好处没有坏处，正如C#之父Anders Hejlsberg在《编程语言大趋势》一文中所说，未来的编程语言将逐渐融合各自的特性，而不会只存在单纯的声明式语言或者单纯的函数编程语言。</p>
+<h3 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a><strong>类型推断</strong></h3><p>使用Kotlin编程，开发人员不必为每个变量明确指定类型，编译器可以在编译的时候推导出某个参数的数据类型，从而使得代码更为简洁。Java在最近的Java 8版本中也推出这一功能。</p>
+<h3 id="支持自定义的DSL"><a href="#支持自定义的DSL" class="headerlink" title="支持自定义的DSL"></a><strong>支持自定义的DSL</strong></h3><p>DSL(Domain-Specific Language)，全称领域特定语言，指的是专注于特定问题领域的计算机语言。不同于通用的计算机语言(GPL)，领域特定语言只用在某些特定的领域。</p>
+<p>DSL语言能让开发者以一种更优雅、更简洁的方式来表达和解决领域问题。例如，gradle就是一种用groovy定义的dsl。Kotlin的lambda系统使其成为创建DSL的理想选择。</p>
+<h3 id="IDE环境的支持"><a href="#IDE环境的支持" class="headerlink" title="IDE环境的支持"></a><strong>IDE环境的支持</strong></h3><p>作为JetBrains旗下的产品，JetBrains旗下众多的IDE可以为Kotlin开发提供无缝支持，并相互协作，协同发展。</p>
+<p>正式因为Kotlin的这些优势，在今年的Google I&#x2F;O大会上，Google将Kotlin列为Android开发的第一语言。在不久前旧金山举行的第一届Kotlin专题会议会议上，Kotlin官方宣布将会在1.2版本中添加支持iOS开发的功能。这难道是要成为全栈语言的节奏吗。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/kotlin/" class="category-chain-item">kotlin</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Kotlin-Web/">#Kotlin Web</a>
+      
+        <a href="/tags/kotlin-app/">#kotlin app</a>
+      
+        <a href="/tags/kotlin-ganmes/">#kotlin ganmes</a>
+      
+        <a href="/tags/%E5%85%A8%E6%A0%88/">#全栈</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>初识kotlin</div>
+      <div>https://tanzicai.github.io/2021/09/26/初识kotlin/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zicai Tan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年9月26日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="ND - 禁止演绎">
+                    <i class="iconfont icon-nd"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/26/1-kotlin%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95%E5%8F%8A%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/" title="1-kotlin基本语法及编码规范">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">1-kotlin基本语法及编码规范</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/25/TCGABiolinks/" title="TCGAbiolinks使用手册">
+                        <span class="hidden-mobile">TCGAbiolinks使用手册</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://tanzicai.github.io/" target="_blank" rel="nofollow noopener"><span>TanBlogs</span></a> <i class="iconfont icon-love"></i> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

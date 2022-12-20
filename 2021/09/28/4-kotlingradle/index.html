@@ -1,0 +1,1148 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zicai Tan">
+  <meta name="keywords" content="Blogs">
+  
+    <meta name="description" content="原始开发流程TDD对于基本开发流程，主要是  编译 测试 手动以来管理 打包 上传服务器  基本开发流程编译主类 public class Girl &amp;#123;     public String greeting()&amp;#123;         return &quot;hello&quot;;     &amp;#125; &amp;#125;  编写测试类 import org.*;  public class TestGr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4-kotlinGradle">
+<meta property="og:url" content="https://tanzicai.github.io/2021/09/28/4-kotlingradle/index.html">
+<meta property="og:site_name" content="TanBlogs">
+<meta property="og:description" content="原始开发流程TDD对于基本开发流程，主要是  编译 测试 手动以来管理 打包 上传服务器  基本开发流程编译主类 public class Girl &amp;#123;     public String greeting()&amp;#123;         return &quot;hello&quot;;     &amp;#125; &amp;#125;  编写测试类 import org.*;  public class TestGr">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210928172256.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210928193507.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210929172016.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210929172200.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210929172715.png">
+<meta property="article:published_time" content="2021-09-28T07:51:13.000Z">
+<meta property="article:modified_time" content="2022-12-20T07:04:56.188Z">
+<meta property="article:author" content="Zicai Tan">
+<meta property="article:tag" content="Kotlin Web">
+<meta property="article:tag" content="kotlin app">
+<meta property="article:tag" content="kotlin ganmes">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210928172256.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>4-kotlinGradle - TanBlogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tanzicai.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"__","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"always","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Bash"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-250117712-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21492855,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-250117712-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21492855.js');
+      }
+    </script>
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 50vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>TanBlogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="4-kotlinGradle"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Zicai Tan
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-09-28 15:51" pubdate>
+          2021年9月28日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          66 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">4-kotlinGradle</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：14 分钟前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="原始开发流程TDD"><a href="#原始开发流程TDD" class="headerlink" title="原始开发流程TDD"></a>原始开发流程TDD</h1><p>对于基本开发流程，主要是</p>
+<ul>
+<li>编译</li>
+<li>测试</li>
+<li>手动以来管理</li>
+<li>打包</li>
+<li>上传服务器</li>
+</ul>
+<h2 id="基本开发流程"><a href="#基本开发流程" class="headerlink" title="基本开发流程"></a>基本开发流程</h2><p>编译主类</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Girl</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">greeting</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>编写测试类</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span></span><span class="token operator">*</span></span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestGril</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">sayGreeting</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">Girl</span> girl <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Girl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">String</span> actual <span class="token operator">=</span> girl<span class="token punctuation">.</span><span class="token function">greeting</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Assert</span><span class="token punctuation">.</span><span class="token function">assertEquals</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">,</span>actual<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>编写主函数类</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Girl</span> girl <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Girl</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        girl<span class="token punctuation">.</span><span class="token function">greeting</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>然后到处jar包，同时写一个批处理文件,satrt.bat</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">java</span> <span class="token parameter variable">-cp</span> greting.jar Main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+<p>然后双颊start.bat开始运行</p>
+<h2 id="自动化构建工具"><a href="#自动化构建工具" class="headerlink" title="自动化构建工具"></a>自动化构建工具</h2><ul>
+<li>Ant</li>
+<li>Maven</li>
+<li>Gradle</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>工具名称</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ant</td>
+<td>编译测试</td>
+</tr>
+<tr>
+<td>Maven</td>
+<td>编译测试、依赖管理</td>
+</tr>
+<tr>
+<td>Gradle</td>
+<td>编译测试、依赖管理、DSL自定义拓展任务</td>
+</tr>
+</tbody></table>
+<h2 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h2><ul>
+<li>可以使用kotlin代码控制的一种智能的自动化构建工具</li>
+<li>用代码来控制工具</li>
+<li>不是xml配置</li>
+<li>可以构造所有语言种类</li>
+</ul>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210928172256.png" srcset="/img/loading.gif" lazyload alt="image-20210928172249763"></p>
+<h1 id="Gradle-1"><a href="#Gradle-1" class="headerlink" title="Gradle"></a>Gradle</h1><h2 id="安装Gradle"><a href="#安装Gradle" class="headerlink" title="安装Gradle"></a>安装Gradle</h2><blockquote>
+<p>gradle官网:<a target="_blank" rel="noopener" href="https://gradle.org/">gradle生成工具 (gradle.org)</a></p>
+</blockquote>
+<blockquote>
+<p>需要java环境支持，最低版本jdk1.8</p>
+</blockquote>
+<p>安装后需要添加环境变量（Path – &gt; Gradle&#x2F;bin），具体自行搜索环境变量添加步骤。</p>
+<p>然后测试如下就代表安装成功</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210928193507.png" srcset="/img/loading.gif" lazyload alt="image-20210928193407035"></p>
+<h2 id="快读入门"><a href="#快读入门" class="headerlink" title="快读入门"></a>快读入门</h2><p>先创建Gradle工程，我们可以在其中编写kotlin代码和java代码等</p>
+<p>这一步全是辛酸历程，当前gradle版本已经到了7.2，但是我使用的教程还停留在4.0，而且许多语法已经弃用，替换成了新的语法写法。如果你要参考下面的代码，请先确定自己的gradle版本是4.0左右。如果无法确定或者不知道怎么更该gradle版本的话，请往下看</p>
+<p>首先打开gradle官网，我们需要下载<a target="_blank" rel="noopener" href="https://gradle.org/releases/">gradle-4.10</a></p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210929172016.png" srcset="/img/loading.gif" lazyload alt="image-20210929171955956"></p>
+<p>然后把下载的文件放在一个安全不容易被删除的目录并记录下当前的路径</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210929172200.png" srcset="/img/loading.gif" lazyload alt="image-20210929172200632"></p>
+<p>然后在gardle生成的文件夹中<code>gradle-wallpaper.properties</code>文件中修改<code>distributionUrl</code>地址换成自己刚刚复制的地址</p>
+<blockquote>
+<p>注意：由于是在windows系统下，目录路径中所有的右斜杠需要换成左斜杠，否则找不到文件。</p>
+</blockquote>
+<figure><div class="code-wrapper"><pre class="line-numbers language-properties" data-language="properties"><code class="language-properties"><span class="token key attr-name">distributionBase</span><span class="token punctuation">=</span><span class="token value attr-value">GRADLE_USER_HOME</span>
+<span class="token key attr-name">distributionPath</span><span class="token punctuation">=</span><span class="token value attr-value">wrapper/dists</span>
+<span class="token key attr-name">distributionUrl</span><span class="token punctuation">=</span><span class="token value attr-value">file\:///C:/Users/tanzicai/.gradle/wrapper/dists/gradle-4.10.2-all.zip</span>
+<span class="token key attr-name">zipStoreBase</span><span class="token punctuation">=</span><span class="token value attr-value">GRADLE_USER_HOME</span>
+<span class="token key attr-name">zipStorePath</span><span class="token punctuation">=</span><span class="token value attr-value">wrapper/dists</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>然后把<code>build.gradle</code>修改成<code>build.gradle.kts</code>并删除其中的所有代码添加以下代码</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin">plugins<span class="token punctuation">&#123;</span>
+    application
+    <span class="token function">kotlin</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"jvm"</span></span><span class="token punctuation">)</span> version <span class="token string-literal singleline"><span class="token string">"1.4.30"</span></span>
+<span class="token punctuation">&#125;</span>
+
+group <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"org.example"</span></span>
+version <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"1.0-SNAPSHOT"</span></span>
+
+application<span class="token punctuation">&#123;</span>
+    mainClassName <span class="token operator">=</span> <span class="token string-literal singleline"><span class="token string">"Hello"</span></span>
+<span class="token punctuation">&#125;</span>
+
+dependencies<span class="token punctuation">&#123;</span>
+    <span class="token function">implementation</span><span class="token punctuation">(</span><span class="token function">kotlin</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"stdlib"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+
+repositories<span class="token punctuation">&#123;</span>
+    <span class="token function">jcenter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>然后就可以创建出<code>src</code>文件夹并在其中编程自己的代码了。</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210929172715.png" srcset="/img/loading.gif" lazyload alt="image-20210929172715781"></p>
+<h2 id="gradle的project和task"><a href="#gradle的project和task" class="headerlink" title="gradle的project和task"></a>gradle的project和task</h2><h3 id="task编写"><a href="#task编写" class="headerlink" title="task编写"></a>task编写</h3><p>在<code>build.gardle.kts</code>中我们可以编写自己需要的任务，</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token function">task</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"hello"</span></span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"hello,successful"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="task依赖"><a href="#task依赖" class="headerlink" title="task依赖"></a>task依赖</h3><p>我们在执行一个任务之前必须先执行另一个任务的这个过程就叫做依赖，我们可以使用<code>.depensON()</code>来确定我们任务执行的依赖，写法如下</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token function">task</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"openDoor"</span></span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"打开门"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token function">task</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"put"</span></span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"放大像"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">dependsOn</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"openDoor"</span></span><span class="token punctuation">)</span>
+
+<span class="token function">task</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"closeDoor"</span></span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"关门"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">dependsOn</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"put"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>我们在运行closeDoor任务的时候，<code>build</code>执行如下</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token number">17</span><span class="token punctuation">:</span><span class="token number">49</span><span class="token punctuation">:</span><span class="token number">10</span><span class="token punctuation">:</span> Executing task <span class="token string">'closeDoor'</span><span class="token punctuation">...</span>
+
+<span class="token operator">></span> Task <span class="token punctuation">:</span>openDoor UP<span class="token operator">-</span>TO<span class="token operator">-</span>DATE
+<span class="token operator">></span> Task <span class="token punctuation">:</span>put UP<span class="token operator">-</span>TO<span class="token operator">-</span>DATE
+<span class="token operator">></span> Task <span class="token punctuation">:</span>closeDoor UP<span class="token operator">-</span>TO<span class="token operator">-</span>DATE
+
+BUILD SUCCESSFUL <span class="token keyword">in</span> 169ms<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+
+
+<h3 id="task任务的生命周期"><a href="#task任务的生命周期" class="headerlink" title="task任务的生命周期"></a>task任务的生命周期</h3><p>task周期有两个</p>
+<ul>
+<li>扫描</li>
+<li>执行</li>
+</ul>
+<p>task任务生命周期中的扫描是在<code>gradle build</code>的时候先对<code>build.gradle.kts</code>进行扫描，包括task名和闭包里面的内容，那我们需要的是在task执行的时候在运行我们的任务，而不是在扫描的时候就执行一遍，那么我们就需要通过<code>doFirst</code>和<code>doLast</code>来完成相应的需求了</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token function">task</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"openDoor"</span></span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+    doFirst<span class="token punctuation">&#123;</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"打开门"</span></span><span class="token punctuation">)</span>
+ <span class="token punctuation">&#125;</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+
+<span class="token function">task</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"put"</span></span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+    doFirst<span class="token punctuation">&#123;</span>
+         <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"放大像"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">dependsOn</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"openDoor"</span></span><span class="token punctuation">)</span>
+
+<span class="token function">task</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"closeDoor"</span></span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+    doFirst<span class="token punctuation">&#123;</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"关门"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">dependsOn</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"put"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>这样在刷新的时候就不会执行了</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy"><span class="token operator">></span> Task <span class="token punctuation">:</span>prepareKotlinBuildScriptModel UP<span class="token operator">-</span>TO<span class="token operator">-</span>DATE
+
+BUILD SUCCESSFUL <span class="token keyword">in</span> 1s
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>在我们运行指定task时，就可以正常执行了</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-groovy" data-language="groovy"><code class="language-groovy">PS C<span class="token punctuation">:</span>\Users\tanzicai\IdeaProjects\testTask<span class="token operator">></span> gradle  closeDoor
+
+<span class="token operator">></span> Configure project <span class="token punctuation">:</span>
+打开门
+放大像
+关门
+
+BUILD SUCCESSFUL <span class="token keyword">in</span> 2s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>即我们在task中的时间周期是这样的</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin"><span class="token function">task</span><span class="token punctuation">(</span>Name<span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+    code<span class="token operator">:</span>扫描时执行
+    doFirst<span class="token punctuation">&#123;</span>
+        code<span class="token operator">:</span>在运行时执行
+    <span class="token punctuation">&#125;</span>
+    doLast<span class="token punctuation">&#123;</span>
+        code<span class="token operator">:</span>运行时执行
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="gradle任务集"><a href="#gradle任务集" class="headerlink" title="gradle任务集"></a>gradle任务集</h3><p><code>tasks</code>:多个任务集合就是任务集</p>
+<p>写法如下：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin">task<span class="token punctuation">&#123;</span>
+    <span class="token string-literal singleline"><span class="token string">"task1Name"</span></span><span class="token punctuation">&#123;</span>
+        
+    <span class="token punctuation">&#125;</span>
+    <span class="token string-literal singleline"><span class="token string">"task2Name"</span></span><span class="token punctuation">&#123;</span>
+        
+    <span class="token punctuation">&#125;</span>
+    <span class="token string-literal singleline"><span class="token string">"task3Name"</span></span><span class="token punctuation">&#123;</span>
+        
+    <span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">dependsOn</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"dependsOnTaskName"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="gradle"><a href="#gradle" class="headerlink" title="gradle"></a>gradle</h3><p><code>garadle</code>	由很多默认的方法和属性，这些属性我们在有些特定的开发时会进行修改，那么我我们需要看一看project究竟有哪些属性</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">parent-- null
+
+classLoaderScope-- org.gradle.api.internal.initialization.DefaultClassLoaderScope@59171861
+
+buildDir-- C:\Users\tanzicai\IdeaProjects\testTask\build
+configurations-- configuration container
+
+plugins-- [org.gradle.api.plugins.HelpTasksPlugin@28b86f00, org.gradle.kotlin.dsl.provider.plugins.KotlinScriptRootPlugin@449f900e, org.gradle.kotlin.dsl.provider.plugins.KotlinScriptBasePlugin@5a09c5e8]
+
+scriptHandlerFactory-- org.gradle.api.internal.initialization.DefaultScriptHandlerFactory@7dba08e4
+
+objects-- org.gradle.api.internal.model.DefaultObjectFactory@1611b83c
+
+logger-- org.gradle.internal.logging.slf4j.OutputEventListenerBackedLogger@3d564c16
+deferredProjectConfiguration-- org.gradle.api.internal.project.DeferredProjectConfiguration@2eb65510
+
+rootDir-- C:\Users\tanzicai\IdeaProjects\testTask
+
+project-- root project &#39;testTask&#39;
+
+projectRegistry-- org.gradle.api.internal.project.DefaultProjectRegistry@3a84f3ab
+
+path-- :
+
+normalization-- 
+
+org.gradle.normalization.internal.DefaultInputNormalizationHandler_Decorated@17542137
+repositories-- repository container
+
+childProjects-- &#123;&#125;
+
+scriptPluginFactory-- org.gradle.configuration.ScriptPluginFactorySelector@c9fabb9
+state-- project state &#39;EXECUTING&#39;
+
+resourceLoader-- org.gradle.internal.resource.transfer.DefaultUriTextResourceLoader@101d61ef
+
+serviceRegistryFactory-- org.gradle.internal.service.scopes.ProjectScopeServices$4@d19c1ec
+
+tasks-- task set
+
+org.gradle.kotlin.dsl.accessors.MultiProjectSchemaSnapshot-- MultiProjectSchemaSnapshot(schema&#x3D;null)
+
+group--
+
+artifacts-- org.gradle.api.internal.artifacts.dsl.DefaultArtifactHandler_Decorated@3bf214e1
+
+ext-- org.gradle.api.internal.plugins.DefaultExtraPropertiesExtension@4ac1b245
+
+projectDir-- C:\Users\tanzicai\IdeaProjects\testTask
+
+dependencyLocking-- org.gradle.internal.locking.DefaultDependencyLockingHandler_Decorated@31a8a0eb
+
+configurationTargetIdentifier-- org.gradle.configuration.ConfigurationTargetIdentifier$1@72fd0193
+
+projectEvaluationBroadcaster-- ProjectEvaluationListener broadcast
+
+projectPath-- :
+module-- org.gradle.api.internal.artifacts.ProjectBackedModule@26402a9f
+
+inheritedScope-- org.gradle.api.internal.ExtensibleDynamicObject$InheritedDynamicObject@59035631
+version-- unspecified
+script-- false
+dependencies-- org.gradle.api.internal.artifacts.dsl.dependencies.DefaultDependencyHandler_Decorated@1e9794ce
+fileResolver-- org.gradle.api.internal.file.BaseDirFileResolver@6accd00f
+extensions-- org.gradle.api.internal.plugins.DefaultConvention@7027b55c
+modelRegistry-- org.gradle.model.internal.registry.DefaultModelRegistry@33d6d7b7
+projectEvaluator-- org.gradle.configuration.project.LifecycleProjectEvaluator@11c504e7
+projectConfigurator-- org.gradle.api.internal.project.BuildOperationCrossProjectConfigurator@1d85e278
+name-- testTask
+logging-- org.gradle.internal.logging.services.DefaultLoggingManager@504539c1
+configurationActions-- org.gradle.configuration.project.DefaultProjectConfigurationActionContainer@55ab3711
+buildscript-- org.gradle.api.internal.initialization.DefaultScriptHandler@6c70f37f
+status-- release
+processOperations-- org.gradle.api.internal.file.DefaultFileOperations@5ed45aab
+subprojects-- []
+components-- SoftwareComponentInternal set
+asDynamicObject-- DynamicObject for root project &#39;testTask&#39;
+printProject-- task &#39;:printProject&#39;
+displayName-- root project &#39;testTask&#39;
+identityPath-- :
+parentIdentifier-- null
+description-- null
+antBuilderFactory-- org.gradle.api.internal.project.DefaultAntBuilderFactory@2726fb81
+buildPath-- :
+fileOperations-- org.gradle.api.internal.file.DefaultFileOperations@5ed45aab
+pluginManager-- org.gradle.api.internal.plugins.DefaultPluginManager_Decorated@2bb943cb
+standardOutputCapture-- org.gradle.internal.logging.services.DefaultLoggingManager@504539c1
+defaultTasks-- []
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<h3 id="gradle增量式更新"><a href="#gradle增量式更新" class="headerlink" title="gradle增量式更新"></a>gradle增量式更新</h3><p>前面我们说过gradle的打包速度明显快于<code>maven</code>，那么为什么会这样呢？</p>
+<p>其实呀，这就来源于gradle的增量式更新的方法，gradle支持只更新更改过的文件</p>
+<p>在<code>gradle</code>中我们需要手动添加代码完成增量式更新</p>
+<ul>
+<li>inputs.dir()</li>
+<li>outputs.dir()</li>
+<li>outputs.file()</li>
+<li>inputs.file()</li>
+</ul>
+<p>这四个函数就是完成增量式更新的</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-kotlin" data-language="kotlin"><code class="language-kotlin">plugins<span class="token punctuation">&#123;</span>
+    java
+<span class="token punctuation">&#125;</span>
+
+<span class="token function">task</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"getClassName"</span></span><span class="token punctuation">,</span><span class="token punctuation">&#123;</span>
+<span class="token comment">//    inputs.dir("src")</span>
+<span class="token comment">//    outputs.file("info.txt")</span>
+    doFirst<span class="token punctuation">&#123;</span>
+        <span class="token keyword">var</span> srcdir <span class="token operator">=</span> <span class="token function">fileTree</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"src"</span></span><span class="token punctuation">)</span>
+        <span class="token keyword">var</span> infotxt <span class="token operator">=</span> <span class="token function">file</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"info.txt"</span></span><span class="token punctuation">)</span>
+        infotxt<span class="token punctuation">.</span><span class="token function">writeText</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">""</span></span><span class="token punctuation">)</span>
+        srcdir<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span>isFile<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                Thread<span class="token punctuation">.</span><span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span>
+                infotxt<span class="token punctuation">.</span><span class="token function">appendText</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span>absolutePath<span class="token punctuation">)</span>
+                infotxt<span class="token punctuation">.</span><span class="token function">appendText</span><span class="token punctuation">(</span><span class="token string-literal singleline"><span class="token string">"\r\b"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>我们使用了以上代码来读取我们目录中的所有文件的绝对路径，并记录在<code>info.txt</code>文件中。我们通过时间来判断是否上述代码起了作用。</p>
+<ul>
+<li>没有增量式代码时:</li>
+</ul>
+<p>我们跑了两次代码，每次均需要4s左右时间跑完代码</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">BUILD SUCCESSFUL in 4s
+1 actionable task: 1 executed
+PS C:\Users\tanzicai\IdeaProjects\testTask&gt; gradle getClassName
+
+BUILD SUCCESSFUL in 4s
+1 actionable task: 1 executed
+PS C:\Users\tanzicai\IdeaProjects\testTask&gt;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<ul>
+<li>加上增量式代码</li>
+</ul>
+<p>我们加上增量式代码后发现速度确实有提升</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-none"><code class="language-none">BUILD SUCCESSFUL in 4s
+1 actionable task: 1 executed
+PS C:\Users\tanzicai\IdeaProjects\testTask&gt; gradle getClassName
+
+BUILD SUCCESSFUL in 2s
+1 actionable task: 1 up-to-date
+PS C:\Users\tanzicai\IdeaProjects\testTask&gt; gradle getClassName
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>原理就是这两句代码会在运行时判断现在的内容是是不是和上次的内容一样，如果一样的话就不会在跑一边，有删改的话只跑删改的部分，而不全部跑完。以此来达到增加编译速度的目的。</p>
+<h3 id="gradle插件"><a href="#gradle插件" class="headerlink" title="gradle插件"></a>gradle插件</h3><p>插件：<code>gradle</code>插件是包含一个或者多个任务的合集</p>
+<p>官网插件仓库<a href="plugins.gradle.org">插件商店</a></p>
+<ul>
+<li>java ：打包java</li>
+<li>application ：打包java或者kotlin</li>
+<li>war ：打包javaee项目，放在concat运行</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/kotlin/" class="category-chain-item">kotlin</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Kotlin-Web/">#Kotlin Web</a>
+      
+        <a href="/tags/kotlin-app/">#kotlin app</a>
+      
+        <a href="/tags/kotlin-ganmes/">#kotlin ganmes</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>4-kotlinGradle</div>
+      <div>https://tanzicai.github.io/2021/09/28/4-kotlingradle/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zicai Tan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年9月28日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="ND - 禁止演绎">
+                    <i class="iconfont icon-nd"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/09/30/5-gradle%E7%BB%AD%E8%A7%A3/" title="5-gradle续解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">5-gradle续解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/28/3-kotlin%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/" title="3-类和对象">
+                        <span class="hidden-mobile">3-类和对象</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://tanzicai.github.io/" target="_blank" rel="nofollow noopener"><span>TanBlogs</span></a> <i class="iconfont icon-love"></i> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

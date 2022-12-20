@@ -1,0 +1,912 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="谭自财">
+  <meta name="keywords" content="Blogs">
+  
+    <meta name="description" content="第一章1.1绪言 ‘系统’：是由相互制约又相互作用的个体所组成的具有一定功能的整体  输入信号&#x2F;激励：施加于系统的信号，可以用$ e(t) \ f(t)$表示  输出信号&#x2F;响应：系统产生的信号  系统的功能体现：什么样的信号产生什么样的响应   1.2信号的描述及分类1.2.1 信号的描述 信号可以用一个变量或者多个变量的函数来表示。1.自变量：时间、空间、频率或者其他量纲的变">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信号与系统笔记(随堂版)">
+<meta property="og:url" content="https://tanzicai.github.io/2021/03/24/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0-%E9%9A%8F%E5%A0%82%E7%89%88/index.html">
+<meta property="og:site_name" content="TanBlogs">
+<meta property="og:description" content="第一章1.1绪言 ‘系统’：是由相互制约又相互作用的个体所组成的具有一定功能的整体  输入信号&#x2F;激励：施加于系统的信号，可以用$ e(t) \ f(t)$表示  输出信号&#x2F;响应：系统产生的信号  系统的功能体现：什么样的信号产生什么样的响应   1.2信号的描述及分类1.2.1 信号的描述 信号可以用一个变量或者多个变量的函数来表示。1.自变量：时间、空间、频率或者其他量纲的变">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/YxsUGNHEOLRzo3g.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/hancRCkNQLqKBVw.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/JufDUH3cLNMnjwC.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/2msJiQvAHSpefZD.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/lHndypXVb7TKMhD.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/MucVKb2GxpRJzAP.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/K8u2FhWLPw45eYb.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/kdRqix8QB5slwVK.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/ELwhzxZm8iaH6gB.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/uG2cP59gUM31pkl.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/URt1xD4ncAQ9dE8.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/1esU6qS2YRj8TOi.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/Ih6B92753PSJTUL.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/kXoVftMhIAbWZDz.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/cgRb32HKSruXnzB.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/XRuAqxraECiJDSn.png">
+<meta property="og:image" content="c:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412095850616.png">
+<meta property="og:image" content="c:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412095900256.png">
+<meta property="og:image" content="c:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412095931979.png">
+<meta property="og:image" content="c:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412095938428.png">
+<meta property="og:image" content="c:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412100011738.png">
+<meta property="og:image" content="c:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412100019443.png">
+<meta property="og:image" content="c:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412100108045.png">
+<meta property="og:image" content="c:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412100120854.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/2msJiQvAHSpefZD.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/lHndypXVb7TKMhD.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/12/j8PMCziDlB2ktXg.png">
+<meta property="article:published_time" content="2021-03-24T12:04:19.000Z">
+<meta property="article:modified_time" content="2022-12-20T07:04:57.824Z">
+<meta property="article:author" content="Zicai Tan">
+<meta property="article:tag" content="信号与系统">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i.loli.net/2021/04/12/YxsUGNHEOLRzo3g.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>信号与系统笔记(随堂版) - TanBlogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tanzicai.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"__","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"always","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Bash"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-250117712-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21492855,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-250117712-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21492855.js');
+      }
+    </script>
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 50vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>TanBlogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="信号与系统笔记(随堂版)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        谭自财
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-03-24 20:04" pubdate>
+          2021年3月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">信号与系统笔记(随堂版)</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：14 分钟前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="1-1绪言"><a href="#1-1绪言" class="headerlink" title="1.1绪言"></a>1.1绪言</h2><ol>
+<li><p>‘系统’：是由相互制约又相互作用的个体所组成的具有一定功能的整体</p>
+</li>
+<li><p>输入信号&#x2F;<strong>激励</strong>：施加于系统的信号，可以用$ e(t) \ f(t)$表示</p>
+</li>
+<li><p>输出信号&#x2F;响应：系统产生的信号</p>
+</li>
+<li><p>系统的功能体现：什么样的信号产生什么样的响应</p>
+</li>
+</ol>
+<h2 id="1-2信号的描述及分类"><a href="#1-2信号的描述及分类" class="headerlink" title="1.2信号的描述及分类"></a>1.2信号的描述及分类</h2><h3 id="1-2-1-信号的描述"><a href="#1-2-1-信号的描述" class="headerlink" title="1.2.1 信号的描述"></a>1.2.1 信号的描述</h3><ol>
+<li><p>信号可以用一个变量或者多个变量的函数来表示。<br>1.自变量：时间、空间、频率或者其他量纲的变量<br>2.因变量：各种物理量或者数量，其可以代表不同物理形态的数学函数或函数的值</p>
+<p><img src="https://i.loli.net/2021/04/12/YxsUGNHEOLRzo3g.png" srcset="/img/loading.gif" lazyload></p>
+</li>
+<li><p><strong>时间特性</strong>：以时间$t$为自变量，信号可以代表为$t$的函数,用时间$f(t),y(t)$等表征,信号也可以描绘成随时间变化的波形图.信号在莫一时刻的大小、信号持续时间的长短、信号变化的快慢都可以在波形图上反映出来</p>
+</li>
+<li><p>非时间特性：类空间特征，例如像素图</p>
+</li>
+<li><p><strong>频率特征</strong>：信号在一定条件下可以分解为不同频率的正弦分量之和，正弦分量的振幅和初相位之间的关系叫做频率特征</p>
+</li>
+</ol>
+<h3 id="1-2-2-信号的分类"><a href="#1-2-2-信号的分类" class="headerlink" title="1.2.2 信号的分类"></a>1.2.2 信号的分类</h3><p><strong>信号的分类：</strong></p>
+<ol>
+<li>根据信号是否确切</li>
+</ol>
+<p>$$ 信号&#x3D;\begin{cases} 随机信号 &amp; 信号不确切 &#x3D; \begin{cases}连续信号 &amp; 时间自变量连续 \离散信号 &amp; 时间自变量离散\end{cases} \ 确定信号 &amp; 信号确定 \end{cases}$$</p>
+<p>确定信号:  信号可以写出一个确定的时间函数表达式,对于每一个时刻$t$都有确定的函数值与其对应</p>
+<p>随机信号:不能写出确定的时间表达式,只能用概率统计的方法来描述 , 即只能预测该信号在某一时刻的概率 , 而该时刻信号的值是未知的</p>
+<p><strong>随机信号在一定条件下可以近似表示为某种确定信号</strong></p>
+<ol start="2">
+<li>根据信号的<strong>时间自变量</strong>是否连续</li>
+</ol>
+<p>$信号 &#x3D; \begin{cases}连续信号 &amp; 时间自变量连续 &#x3D; \begin{cases} 模拟信号 &amp; 信号(函数值)也连续 \ 非模拟信号 &amp; 信号(函数值)不连续 \end{cases} \离散信号 &amp; 时间自变量离散\end{cases} $</p>
+<p>连续信号 : 除有限个间断点以外 , 一个信号在任意时刻均有定义值( 允许函数值跳变 )</p>
+<p>离散信号 : 只有在一系列离散的瞬间有确切定义而在其他时刻无定义的信号</p>
+<p>取样信号 : 时间离散而函数值连续的 , 其幅值可能有无限多个值,不便编成数字码 .</p>
+<p><strong>离散信号和连续信号的转换</strong></p>
+<p>​	采样：连续信号—&gt;离散信号</p>
+<p><img src="https://i.loli.net/2021/04/12/hancRCkNQLqKBVw.png" srcset="/img/loading.gif" lazyload alt="image-20210412090547540"></p>
+<p>​	量化：离散信号——&gt;数字信号</p>
+<p><img src="https://i.loli.net/2021/04/12/JufDUH3cLNMnjwC.png" srcset="/img/loading.gif" lazyload alt="image-20210412090651160"></p>
+<ol>
+<li><p>根据信号时间域的定义范围</p>
+<p>$信号&#x3D; \begin{cases}时限信号 &amp;时间域有始有终\有终信号&amp;时间域无始有终\有始信号&amp;时间域有始无终&#x3D; \begin{cases}因果信号 &amp; 时间是从t&#x3D;0开始(0,+无穷) \ 反因果信号 &amp; 因果信号的反折(-无穷,0)\end{cases} \ 无时限信号 &amp; 时间域无始无终 \end{cases}$</p>
+</li>
+<li><p>根据信号的周期性</p>
+<p>$信号 &#x3D; \begin{cases}(连续)周期信号 &amp; 按一定时间周期T周而复始重复出现的&amp;&amp;时间域无始无终的信号\ 非周期信号 &amp; 不具备以上两个条件\end{cases}$</p>
+</li>
+</ol>
+<p style="color:red;font-size:bold;">周期信号相加是否为周期信号的判断方法</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">判断条件:两个信号周期的最小公倍数存在就是周期函数,周期为最小公倍数,否则不存在<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+
+
+
+<ol start="5">
+<li><p>根据能量是否有界</p>
+<p>$信号 &#x3D; \begin{cases} 能量信号 &amp; 平均功率为0&amp;&amp;总能量为有限制  \ 功率信号 &amp; 平均功率为有限值 &amp;&amp;总能量无限大 \ 非功非能信号 &amp;平均功率无限大&amp;&amp; 总能量无限大\end{cases}$</p>
+<p><img src="https://i.loli.net/2021/04/12/2msJiQvAHSpefZD.png" srcset="/img/loading.gif" lazyload alt="image-20210412090914267"></p>
+<ol>
+<li><p>信号 f(t) 能量和功率的计算</p>
+<p><img src="https://i.loli.net/2021/04/12/lHndypXVb7TKMhD.png" srcset="/img/loading.gif" lazyload alt="image-20210412090819260"></p>
+</li>
+</ol>
+</li>
+<li><p>根据方程是否是复数</p>
+<p>$信号 &#x3D; \begin{cases}实信号 &amp; 信号方程是实数方程 \ 复信号 &amp; 信号方程是复数方程\end{cases}$</p>
+</li>
+</ol>
+<h2 id="1-3典型信号"><a href="#1-3典型信号" class="headerlink" title="1.3典型信号"></a>1.3典型信号</h2><h3 id="1-3-1-典型连续信号"><a href="#1-3-1-典型连续信号" class="headerlink" title="1.3.1 典型连续信号"></a>1.3.1 典型连续信号</h3><h4 id="复指数信号"><a href="#复指数信号" class="headerlink" title="复指数信号"></a><strong>复指数信号</strong></h4><p>$$f(t)&#x3D;Ae^{st} &#x3D; Ae^{\sigma+j\omega t} &#x3D;Ae^{\sigma}e^{^{j\omega t}}&#x3D;Ae^{\sigma t}cos\omega t +jAe^{\sigma t}sin\omega t$$</p>
+<p>$j\omega t$<strong>为复数，称为复频率</strong></p>
+<p>$\omega,\sigma$为实数</p>
+<p>$\omega&#x3D;0$为实指数信号</p>
+<p>$\sigma&#x3D;0$为虚指数信号</p>
+<ol>
+<li><p>实指数信号</p>
+<p>$f(t)&#x3D;Ae^σt$</p>
+<p><img src="https://i.loli.net/2021/04/12/MucVKb2GxpRJzAP.png" srcset="/img/loading.gif" lazyload alt="image-20210412092857777"></p>
+<p><strong>单边衰减指数信号</strong></p>
+<p>$$f(t)&#x3D;\begin{cases}0&amp;t&lt;0\Ae^σt&amp;t≥0)\end{cases}$$</p>
+</li>
+<li><p>正弦信号</p>
+<p> $f(t)&#x3D;A cos⁡( ωt+ϕ)$</p>
+<p> <img src="https://i.loli.net/2021/04/12/K8u2FhWLPw45eYb.png" srcset="/img/loading.gif" lazyload alt="image-20210412093312213"></p>
+</li>
+<li><p>变幅正弦振荡信号<br> $f(t)&#x3D;Ae^{σt} cos⁡ωt$</p>
+</li>
+</ol>
+<p>  $f_r (t)&#x3D;Re⁡[ Ae^st]&#x3D;Ae^σt cos⁡ω t $</p>
+<p>  $f_i (t)&#x3D;Im⁡[ Ae^st]&#x3D;Ae^σt sin⁡ω t $</p>
+<ol>
+<li><p>σ＜0：按指数规律衰减的正弦振荡信号；</p>
+<p><img src="https://i.loli.net/2021/04/12/kdRqix8QB5slwVK.png" srcset="/img/loading.gif" lazyload alt="image-20210412093631674"></p>
+</li>
+<li><p>σ＞0：按指数规律增长的正弦振荡信号；</p>
+<p><img src="https://i.loli.net/2021/04/12/ELwhzxZm8iaH6gB.png" srcset="/img/loading.gif" lazyload alt="image-20210412093722102"></p>
+<h4 id="抽样信号"><a href="#抽样信号" class="headerlink" title="抽样信号"></a><strong>抽样信号</strong></h4><p>$f(t)&#x3D;Sa(t)&#x3D; \frac{sin(t)}{t}$</p>
+<p><img src="https://i.loli.net/2021/04/12/uG2cP59gUM31pkl.png" srcset="/img/loading.gif" lazyload alt="image-20210412094535073"></p>
+<p>性质：</p>
+<p>$$1. Sa⁡(-t)&#x3D;Sa⁡(t)，偶函数<br>\2. t&#x3D;0,Sa⁡( t)&#x3D;1，即即 lim┬(t→0)⁡  Sa⁡( t<br>\3.  Sa⁡( t)&#x3D;0, t&#x3D;±nπ，n&#x3D;1,2,3⋯<br>\4.  ∫<em>0^∞〖sin⁡t&#x2F;t d⁡t&#x3D;π&#x2F;2, 〗 ∫</em>(-∞)^∞〖sin⁡t&#x2F;t d⁡t&#x3D;π〗<br>\5.  lim┬(t→±∞)⁡Sa⁡( t)&#x3D;0<br>\6. sinc⁡( t)&#x3D;sin⁡π t&#x2F;πt$$</p>
+<h4 id="高斯脉冲信号（钟形脉冲信号）"><a href="#高斯脉冲信号（钟形脉冲信号）" class="headerlink" title="高斯脉冲信号（钟形脉冲信号）"></a>高斯脉冲信号（钟形脉冲信号）</h4><p><img src="https://i.loli.net/2021/04/12/URt1xD4ncAQ9dE8.png" srcset="/img/loading.gif" lazyload alt="image-20210412095533076"><img src="https://i.loli.net/2021/04/12/1esU6qS2YRj8TOi.png" srcset="/img/loading.gif" lazyload alt="image-20210412095543058"></p>
+<p><strong>脉冲宽度</strong>：当f(t)下降到最大值0.78A时，所对应的两个截止时刻时间的时间范围。常见题型及解题方法</p>
+<h4 id="奇异函数"><a href="#奇异函数" class="headerlink" title="奇异函数"></a><strong>奇异函数</strong></h4><h5 id="单位斜变信号"><a href="#单位斜变信号" class="headerlink" title="单位斜变信号"></a>单位斜变信号</h5><p><img src="https://i.loli.net/2021/04/12/Ih6B92753PSJTUL.png" srcset="/img/loading.gif" lazyload alt="image-20210412095750325"><img src="https://i.loli.net/2021/04/12/kXoVftMhIAbWZDz.png" srcset="/img/loading.gif" lazyload alt="image-20210412095757194"></p>
+<p><strong>有延迟的单位斜变信号</strong></p>
+<p><img src="https://i.loli.net/2021/04/12/cgRb32HKSruXnzB.png" srcset="/img/loading.gif" lazyload alt="image-20210412095813060"><img src="https://i.loli.net/2021/04/12/XRuAqxraECiJDSn.png" srcset="/img/loading.gif" lazyload alt="image-20210412095821826"></p>
+<p>l <strong>截平斜变信号</strong></p>
+<p><img src="C:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412095850616.png" srcset="/img/loading.gif" lazyload alt="image-20210412095850616"><img src="C:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412095900256.png" srcset="/img/loading.gif" lazyload alt="image-20210412095900256"></p>
+<p>l <strong>锯齿形脉冲信号</strong></p>
+<p><img src="C:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412095931979.png" srcset="/img/loading.gif" lazyload alt="image-20210412095931979"></p>
+<p><img src="C:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412095938428.png" srcset="/img/loading.gif" lazyload alt="image-20210412095938428"></p>
+<p>l <strong>正三角脉冲信号</strong></p>
+<p><img src="C:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412100011738.png" srcset="/img/loading.gif" lazyload alt="image-20210412100011738"><img src="C:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412100019443.png" srcset="/img/loading.gif" lazyload alt="image-20210412100019443"></p>
+<h5 id="单位阶跃函数（重点）"><a href="#单位阶跃函数（重点）" class="headerlink" title="单位阶跃函数（重点）"></a><strong>单位阶跃函数（重点）</strong></h5><p><img src="C:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412100108045.png" srcset="/img/loading.gif" lazyload alt="image-20210412100108045"></p>
+<p><img src="C:\Users\tanzicai\AppData\Roaming\Typora\typora-user-images\image-20210412100120854.png" srcset="/img/loading.gif" lazyload alt="image-20210412100120854"></p>
+</li>
+</ol>
+<h4 id="1-功率信号、能量信号、非功非能信号的判断"><a href="#1-功率信号、能量信号、非功非能信号的判断" class="headerlink" title="1.功率信号、能量信号、非功非能信号的判断"></a>1.功率信号、能量信号、非功非能信号的判断</h4><p>​	判断依据</p>
+<p>​	<img src="https://i.loli.net/2021/04/12/2msJiQvAHSpefZD.png" srcset="/img/loading.gif" lazyload alt="image-20210412090914267"></p>
+<p>​	计算方法</p>
+<p>​	<img src="https://i.loli.net/2021/04/12/lHndypXVb7TKMhD.png" srcset="/img/loading.gif" lazyload alt="image-20210412090819260"></p>
+<p>​	<img src="https://i.loli.net/2021/04/12/j8PMCziDlB2ktXg.png" srcset="/img/loading.gif" lazyload alt="image-20210412092237797"></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A4%A7%E5%AD%A6%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0/" class="category-chain-item">大学课程笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/">#信号与系统</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>信号与系统笔记(随堂版)</div>
+      <div>https://tanzicai.github.io/2021/03/24/信号与系统笔记-随堂版/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>谭自财</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年3月24日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="ND - 禁止演绎">
+                    <i class="iconfont icon-nd"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/31/Markdown%E5%85%AC%E5%BC%8F%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" title="Markdown公式使用说明">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Markdown公式使用说明</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/21/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-C%E8%AF%AD%E8%A8%80-%E7%AC%94%E8%AE%B0/" title="数据结构(C语言)笔记">
+                        <span class="hidden-mobile">数据结构(C语言)笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://tanzicai.github.io/" target="_blank" rel="nofollow noopener"><span>TanBlogs</span></a> <i class="iconfont icon-love"></i> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

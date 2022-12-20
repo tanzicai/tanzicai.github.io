@@ -1,0 +1,954 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="谭自财">
+  <meta name="keywords" content="Blogs">
+  
+    <meta name="description" content="作者：APExBIO链接：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;9a5f8eef02fb来源：简书著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。  热图热图概念：热图是一个以颜色变化来显示数据的矩阵，可以简单地聚合大量数据，并使用一种渐进的色带直观地展现空间数据的相对大小。 热图在生物学中的应用：生物学中热图经常用于展示多个基因在不同样本中的表达水平。然后可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pheatmap 相关性热图 基因表达量热图">
+<meta property="og:url" content="https://tanzicai.github.io/2021/05/07/pheatmap%20%E7%9B%B8%E5%85%B3%E6%80%A7%E7%83%AD%E5%9B%BE%20%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E9%87%8F%E7%83%AD%E5%9B%BE/index.html">
+<meta property="og:site_name" content="TanBlogs">
+<meta property="og:description" content="作者：APExBIO链接：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;9a5f8eef02fb来源：简书著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。  热图热图概念：热图是一个以颜色变化来显示数据的矩阵，可以简单地聚合大量数据，并使用一种渐进的色带直观地展现空间数据的相对大小。 热图在生物学中的应用：生物学中热图经常用于展示多个基因在不同样本中的表达水平。然后可以">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210517133650.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210517133803.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210517133826.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210517133848.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210517133920.png">
+<meta property="article:published_time" content="2021-05-07T01:25:00.000Z">
+<meta property="article:modified_time" content="2022-12-20T07:04:56.686Z">
+<meta property="article:author" content="Zicai Tan">
+<meta property="article:tag" content="TCGA">
+<meta property="article:tag" content="RNA-Seq">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210517133650.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>pheatmap 相关性热图 基因表达量热图 - TanBlogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tanzicai.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"__","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"always","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Bash"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-250117712-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21492855,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-250117712-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21492855.js');
+      }
+    </script>
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 50vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>TanBlogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="pheatmap 相关性热图 基因表达量热图"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        谭自财
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-05-07 09:25" pubdate>
+          2021年5月7日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          37 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">pheatmap 相关性热图 基因表达量热图</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：14 分钟前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>作者：APExBIO<br>链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9a5f8eef02fb">https://www.jianshu.com/p/9a5f8eef02fb</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</blockquote>
+<h1 id="热图"><a href="#热图" class="headerlink" title="热图"></a>热图</h1><p>热图概念：热图是一个以颜色变化来显示数据的矩阵，可以简单地聚合大量数据，并使用一种渐进的色带直观地展现空间数据的相对大小。</p>
+<p>热图在生物学中的应用：生物学中热图经常用于展示多个基因在不同样本中的表达水平。然后可以通过聚类等方式查看不同组（如疾病组和对照组）特有的形式。热图还可以用于展示其他物质的丰度比如微生物的相对丰度、代谢组不同物质的含量等等。当然，另一个热图的重要用处就是展现不同指标、不同样本等之间的相关性。</p>
+<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><ol>
+<li><p>多个样本genes&#x2F;transcripts read counts 文件</p>
+</li>
+<li><p>多个样本genes&#x2F;transcripts FPKM&#x2F;TPM 文件<br> 如果得到单个样本all genes read counts, 需要先合并：<br> 数据格式如下：</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210517133650.png" srcset="/img/loading.gif" lazyload alt="image-20210517133650091"></p>
+<p>image.png</p>
+</li>
+</ol>
+<figure><div class="code-wrapper"><pre class="line-numbers language-r" data-language="r"><code class="language-r"><span class="token comment">##相关性热图，使用数据gene_fpkm.csv</span>
+setwd<span class="token punctuation">(</span><span class="token string">"C:/Users/Desktop/Transcriptome/data/GSE101668_RAW"</span><span class="token punctuation">)</span>
+fpkm<span class="token operator">&lt;-</span>read.csv<span class="token punctuation">(</span><span class="token string">"GSE101668_fpkm.csv"</span><span class="token punctuation">,</span>head<span class="token operator">=</span>T<span class="token punctuation">,</span>row.names<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+head<span class="token punctuation">(</span>fpkm<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">6</span><span class="token punctuation">]</span>
+
+<span class="token comment">#         GSM2711785 GSM2711786 GSM2711787 GSM2711788 GSM2711789 GSM2711790</span>
+<span class="token comment">#A1BG     0.09811600 0.05790660 0.05222180  0.0637481 0.04535840  0.0950140</span>
+<span class="token comment">#A1BG-AS1 0.27003800 0.23612600 0.31530100  0.2080520 0.24668500  0.2326070</span>
+<span class="token comment">#A1CF     0.02785390 0.02190900 0.00000000  0.0180425 0.04533540  0.0280336</span>
+<span class="token comment">#A2M      0.00438851 0.00000000 0.00000000  0.0000000 0.00000000  0.0000000</span>
+<span class="token comment">#A2M-AS1  0.07776420 0.10491300 0.12424300  0.1718890 0.07193070  0.1381680</span>
+<span class="token comment">#A2ML1    0.00000000 0.00366506 0.00463368  0.0000000 0.00670476  0.0000000</span>
+<span class="token comment">##求相关性</span>
+sample_cor<span class="token operator">&lt;-</span>cor<span class="token punctuation">(</span>fpkm<span class="token punctuation">)</span>
+head<span class="token punctuation">(</span>sample_cor<span class="token punctuation">)</span>
+ <span class="token comment">#          GSM2711785 GSM2711786 GSM2711787 GSM2711788 GSM2711789 GSM2711790</span>
+<span class="token comment">#GSM2711785  1.0000000  0.9981079  0.9856211  0.9964200  0.9539448  0.9555485</span>
+<span class="token comment">#GSM2711786  0.9981079  1.0000000  0.9855960  0.9965623  0.9541515  0.9556389</span>
+<span class="token comment">#GSM2711787  0.9856211  0.9855960  1.0000000  0.9886970  0.9414432  0.9429842</span>
+<span class="token comment">#GSM2711788  0.9964200  0.9965623  0.9886970  1.0000000  0.9520301  0.9537503</span>
+<span class="token comment">#GSM2711789  0.9539448  0.9541515  0.9414432  0.9520301  1.0000000  0.9992366</span>
+<span class="token comment">#GSM2711790  0.9555485  0.9556389  0.9429842  0.9537503  0.9992366  1.0000000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210517133803.png" srcset="/img/loading.gif" lazyload alt="image-20210517133803226"></p>
+<p>cor.fpkm1.png</p>
+<p>pheatmap画图</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-r" data-language="r"><code class="language-r"><span class="token comment">#调整参数，换颜色</span>
+library<span class="token punctuation">(</span>pheatmap<span class="token punctuation">)</span>
+library<span class="token punctuation">(</span>ggplot2<span class="token punctuation">)</span>
+p1<span class="token operator">&lt;-</span>pheatmap<span class="token punctuation">(</span>sample_cor<span class="token punctuation">,</span>cluster_rows <span class="token operator">=</span> F<span class="token punctuation">,</span>
+         scale<span class="token operator">=</span><span class="token string">"none"</span><span class="token punctuation">,</span>
+         cluster_cols <span class="token operator">=</span> F<span class="token punctuation">,</span>
+         fontsize_row <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span>
+         fontsize_col <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span>
+         color <span class="token operator">=</span> colorRampPalette<span class="token punctuation">(</span>c<span class="token punctuation">(</span><span class="token string">"navy"</span><span class="token punctuation">,</span> <span class="token string">"white"</span><span class="token punctuation">,</span> <span class="token string">"firebrick3"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+         <span class="token comment">#color = colorRampPalette(c("green3", "white", "blue4"))(100),#换颜色</span>
+         angle_col <span class="token operator">=</span> <span class="token number">45</span><span class="token punctuation">,</span> <span class="token comment">#修改横轴坐标名倾斜度</span>
+         filename <span class="token operator">=</span> <span class="token string">'cor.fpkm2.png'</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210517133826.png" srcset="/img/loading.gif" lazyload alt="image-20210517133825930"></p>
+<p>cor.fpkm2.png</p>
+<p>基因fpkm表达量热图</p>
+<ol>
+<li>基因fpkm表达量准备</li>
+</ol>
+<figure><div class="code-wrapper"><pre class="line-numbers language-r" data-language="r"><code class="language-r"><span class="token comment">#过滤标准:保留基因在大于floor(ncol(exprSet)/10)个样本中表达量大于1</span>
+fpkm_filter<span class="token operator">=</span>fpkm<span class="token punctuation">[</span>apply<span class="token punctuation">(</span>fpkm<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> sum<span class="token punctuation">(</span>x<span class="token operator">></span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">></span> floor<span class="token punctuation">(</span>ncol<span class="token punctuation">(</span>fpkm<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token punctuation">]</span>
+dim<span class="token punctuation">(</span>fpkm<span class="token punctuation">)</span>
+dim<span class="token punctuation">(</span>fpkm_filter<span class="token punctuation">)</span>
+<span class="token operator">></span> dim<span class="token punctuation">(</span>fpkm<span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token number">26228</span>    <span class="token number">12</span>
+<span class="token operator">></span> dim<span class="token punctuation">(</span>fpkm_filter<span class="token punctuation">)</span>
+<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token number">11670</span>    <span class="token number">12</span>
+<span class="token comment">#用log2(fpkm_filter+1)标准化</span>
+data<span class="token operator">=</span>log2<span class="token punctuation">(</span>fpkm_filter<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token comment">#选取每个基因表达量的变异系数最大的1000个</span>
+genes<span class="token operator">=</span>names<span class="token punctuation">(</span>head<span class="token punctuation">(</span>sort<span class="token punctuation">(</span>apply<span class="token punctuation">(</span>data<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token keyword">function</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token number">100</span><span class="token operator">*</span>sd<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token operator">/</span>mean<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>decreasing<span class="token operator">=</span>T<span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">#apply按行（'1'是按行取，'2'是按列取）取每一行的方差，从小到大排序，取最大的1000个</span>
+dat<span class="token operator">=</span>t<span class="token punctuation">(</span>scale<span class="token punctuation">(</span>t<span class="token punctuation">(</span>data<span class="token punctuation">[</span>genes<span class="token punctuation">,</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 'scale'可以对log(fpkm+1)数值进行归一化</span>
+<span class="token comment">#处理数据</span>
+dat<span class="token punctuation">[</span>dat<span class="token operator">></span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">2</span> 
+dat<span class="token punctuation">[</span>dat<span class="token operator">&lt;-</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">=</span> <span class="token operator">-</span><span class="token number">2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<ol>
+<li>样本分组信息准备</li>
+</ol>
+<figure><div class="code-wrapper"><pre class="line-numbers language-r" data-language="r"><code class="language-r">df_info<span class="token operator">=</span>data.frame<span class="token punctuation">(</span>read.table<span class="token punctuation">(</span><span class="token string">"samplename.txt"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>stringsAsFactors <span class="token operator">=</span> F<span class="token punctuation">)</span>                                          
+head<span class="token punctuation">(</span>df_info<span class="token punctuation">)</span>
+ <span class="token comment">#           CellType GroupList</span>
+<span class="token comment">#GSM2711785        WT        WT</span>
+<span class="token comment">#GSM2711786        WT        WT</span>
+<span class="token comment">#GSM2711787 PRDM1-KO2        KO</span>
+<span class="token comment">#GSM2711788 PRDM1-KO2        KO</span>
+<span class="token comment">#GSM2711789 PRDM1-KO5        KO</span>
+<span class="token comment">#GSM2711790 PRDM1-KO5        KO</span>
+
+df1 <span class="token operator">=</span> df_info<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span>drop<span class="token operator">=</span><span class="token boolean">FALSE</span><span class="token punctuation">]</span>
+head<span class="token punctuation">(</span>df1<span class="token punctuation">)</span>
+<span class="token comment"># GroupList</span>
+<span class="token comment">#GSM2711785        WT</span>
+<span class="token comment">#GSM2711786        WT</span>
+<span class="token comment">#GSM2711787        KO</span>
+<span class="token comment">#GSM2711788        KO</span>
+<span class="token comment">#GSM2711789        KO</span>
+<span class="token comment">#GSM2711790        KO</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>情况1：一类分组：KO,OE,WT</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-r" data-language="r"><code class="language-r"><span class="token comment">#####分组KO,OE,WT</span>
+p2<span class="token operator">&lt;-</span>pheatmap<span class="token punctuation">(</span>
+  mat<span class="token operator">=</span>dat<span class="token punctuation">,</span>
+  cluster_rows <span class="token operator">=</span> T<span class="token punctuation">,</span>
+  cluster_columns <span class="token operator">=</span> F<span class="token punctuation">,</span>
+  border_color      <span class="token operator">=</span> <span class="token keyword">NA</span><span class="token punctuation">,</span>
+  show_colnames     <span class="token operator">=</span> <span class="token boolean">FALSE</span><span class="token punctuation">,</span>
+  show_rownames     <span class="token operator">=</span> <span class="token boolean">FALSE</span><span class="token punctuation">,</span>
+  fontsize          <span class="token operator">=</span> <span class="token number">14</span><span class="token punctuation">,</span>
+  annotation_col    <span class="token operator">=</span> df1<span class="token punctuation">,</span>
+  drop_levels       <span class="token operator">=</span> <span class="token boolean">TRUE</span><span class="token punctuation">,</span>
+  main              <span class="token operator">=</span> <span class="token string">"Default Heatmap1"</span><span class="token punctuation">,</span>   
+  filename <span class="token operator">=</span> <span class="token string">'heatmap_top1000_1.png'</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210517133848.png" srcset="/img/loading.gif" lazyload alt="image-20210517133848490"></p>
+<p>heatmap_top1000_1.png</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-r" data-language="r"><code class="language-r"><span class="token comment">#如果要调色</span>
+library<span class="token punctuation">(</span>RColorBrewer<span class="token punctuation">)</span>
+library<span class="token punctuation">(</span>viridis<span class="token punctuation">)</span>
+mat_colors <span class="token operator">&lt;-</span> list<span class="token punctuation">(</span>GroupList <span class="token operator">=</span> brewer.pal<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">"Set1"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+names<span class="token punctuation">(</span>mat_colors<span class="token operator">$</span>GroupList<span class="token punctuation">)</span> <span class="token operator">&lt;-</span> unique<span class="token punctuation">(</span>df1<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+p3<span class="token operator">&lt;-</span>pheatmap<span class="token punctuation">(</span>
+  mat<span class="token operator">=</span>dat<span class="token punctuation">,</span>
+  cluster_rows <span class="token operator">=</span> T<span class="token punctuation">,</span>
+  cluster_columns <span class="token operator">=</span> F<span class="token punctuation">,</span>
+  border_color      <span class="token operator">=</span> <span class="token keyword">NA</span><span class="token punctuation">,</span>
+  show_colnames     <span class="token operator">=</span> <span class="token boolean">FALSE</span><span class="token punctuation">,</span>
+  show_rownames     <span class="token operator">=</span> <span class="token boolean">FALSE</span><span class="token punctuation">,</span>
+  fontsize          <span class="token operator">=</span> <span class="token number">14</span><span class="token punctuation">,</span>
+  annotation_col    <span class="token operator">=</span> df1<span class="token punctuation">,</span>
+  annotation_colors <span class="token operator">=</span> mat_colors<span class="token punctuation">,</span>
+  drop_levels       <span class="token operator">=</span> <span class="token boolean">TRUE</span><span class="token punctuation">,</span>
+  main              <span class="token operator">=</span> <span class="token string">"Default Heatmap2"</span><span class="token punctuation">,</span>   
+  color <span class="token operator">=</span> colorRampPalette<span class="token punctuation">(</span>c<span class="token punctuation">(</span><span class="token string">"navy"</span><span class="token punctuation">,</span> <span class="token string">"white"</span><span class="token punctuation">,</span> <span class="token string">"firebrick3"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token comment">#filename = 'heatmap_top1000_2.png'</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>情况2：两类分组</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-r" data-language="r"><code class="language-r"><span class="token comment">#两类分组1.Celltype；2. GroupList</span>
+p4<span class="token operator">&lt;-</span>pheatmap<span class="token punctuation">(</span>
+  mat<span class="token operator">=</span>dat<span class="token punctuation">,</span>
+  cluster_rows <span class="token operator">=</span> T<span class="token punctuation">,</span>
+  cluster_columns <span class="token operator">=</span> F<span class="token punctuation">,</span>
+  border_color      <span class="token operator">=</span> <span class="token keyword">NA</span><span class="token punctuation">,</span>
+  show_colnames     <span class="token operator">=</span> <span class="token boolean">FALSE</span><span class="token punctuation">,</span>
+  show_rownames     <span class="token operator">=</span> <span class="token boolean">FALSE</span><span class="token punctuation">,</span>
+  fontsize          <span class="token operator">=</span> <span class="token number">14</span><span class="token punctuation">,</span>
+  annotation_col    <span class="token operator">=</span> df_info<span class="token punctuation">,</span>
+  drop_levels       <span class="token operator">=</span> <span class="token boolean">TRUE</span><span class="token punctuation">,</span>
+  main              <span class="token operator">=</span> <span class="token string">"Default Heatmap"</span><span class="token punctuation">,</span>
+  filename <span class="token operator">=</span> <span class="token string">'heatmap_top1000_rtg.png'</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>两类分组自定义颜色</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-php" data-language="php"><code class="language-php"><span class="token comment">#两组分类CellType/GroupList，自己设定颜色</span>
+mat_colors <span class="token operator">&lt;</span><span class="token operator">-</span> <span class="token keyword">list</span><span class="token punctuation">(</span>CellType <span class="token operator">=</span> brewer<span class="token operator">.</span><span class="token function">pal</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token string double-quoted-string">"Set1"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>GroupList <span class="token operator">=</span> brewer<span class="token operator">.</span><span class="token function">pal</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string double-quoted-string">"Set1"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token function">names</span><span class="token punctuation">(</span><span class="token class-name type-declaration">mat_colors</span><span class="token variable">$CellType</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span><span class="token operator">-</span> <span class="token function">unique</span><span class="token punctuation">(</span>df_info<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token function">names</span><span class="token punctuation">(</span><span class="token class-name type-declaration">mat_colors</span><span class="token variable">$GroupList</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span><span class="token operator">-</span> <span class="token function">unique</span><span class="token punctuation">(</span>df_info<span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+p5<span class="token operator">&lt;</span><span class="token operator">-</span><span class="token function">pheatmap</span><span class="token punctuation">(</span>
+  mat<span class="token operator">=</span>dat<span class="token punctuation">,</span>
+  cluster_rows <span class="token operator">=</span> <span class="token constant">T</span><span class="token punctuation">,</span>
+  cluster_columns <span class="token operator">=</span> <span class="token constant">F</span><span class="token punctuation">,</span>
+  border_color      <span class="token operator">=</span> <span class="token constant">NA</span><span class="token punctuation">,</span>
+  show_colnames     <span class="token operator">=</span> <span class="token constant boolean">FALSE</span><span class="token punctuation">,</span>
+  show_rownames     <span class="token operator">=</span> <span class="token constant boolean">FALSE</span><span class="token punctuation">,</span>
+  fontsize          <span class="token operator">=</span> <span class="token number">14</span><span class="token punctuation">,</span>
+  annotation_col    <span class="token operator">=</span> df_info<span class="token punctuation">,</span>
+  annotation_colors <span class="token operator">=</span> mat_colors<span class="token punctuation">,</span>
+  drop_levels       <span class="token operator">=</span> <span class="token constant boolean">TRUE</span><span class="token punctuation">,</span>
+  main              <span class="token operator">=</span> <span class="token string double-quoted-string">"Default Heatmap"</span><span class="token punctuation">,</span>
+  color <span class="token operator">=</span> <span class="token function">colorRampPalette</span><span class="token punctuation">(</span><span class="token function">c</span><span class="token punctuation">(</span><span class="token string double-quoted-string">"navy"</span><span class="token punctuation">,</span> <span class="token string double-quoted-string">"white"</span><span class="token punctuation">,</span> <span class="token string double-quoted-string">"firebrick3"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment">##调颜色</span>
+  <span class="token comment">#color             = inferno(10),</span>
+  <span class="token comment">#color             = rainbow(10),</span>
+  filename <span class="token operator">=</span> <span class="token string double-quoted-string">"heatmap_top1000_tg.png"</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210517133920.png" srcset="/img/loading.gif" lazyload alt="image-20210517133919683"></p>
+<p>heatmap_top1000_tg.png</p>
+<p>鲜艳的热图就这样完成啦！</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8C%BB%E5%AD%A6%E7%BB%9F%E8%AE%A1/" class="category-chain-item">医学统计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/TCGA/">#TCGA</a>
+      
+        <a href="/tags/RNA-Seq/">#RNA-Seq</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>pheatmap 相关性热图 基因表达量热图</div>
+      <div>https://tanzicai.github.io/2021/05/07/pheatmap 相关性热图 基因表达量热图/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>谭自财</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年5月7日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="ND - 禁止演绎">
+                    <i class="iconfont icon-nd"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/07/TCGA%20%E7%9A%84%E5%B7%AE%E5%BC%82%E5%9F%BA%E5%9B%A0%E5%88%86%E6%9E%90/" title="TCGA 差异基因分析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">TCGA 差异基因分析</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/07/%E5%88%A9%E7%94%A8R%E5%8C%85TCGAbiolinks%E8%BF%9B%E8%A1%8C%E5%90%84%E7%A7%8D%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD/" title="利用R包TCGAbiolinks进行各种数据下载">
+                        <span class="hidden-mobile">利用R包TCGAbiolinks进行各种数据下载</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://tanzicai.github.io/" target="_blank" rel="nofollow noopener"><span>TanBlogs</span></a> <i class="iconfont icon-love"></i> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

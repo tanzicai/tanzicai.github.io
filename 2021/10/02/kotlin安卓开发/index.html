@@ -1,0 +1,799 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zicai Tan">
+  <meta name="keywords" content="Blogs">
+  
+    <meta name="description" content="开发环境搭建下载AndroidStudioGoogle官方下载地址 下载后进行安装,安装后打开可能会有提示信息  该页面是未找到SDKs,如果有的话点击setupProxy设置SDK路径,如果没有SDK就点击cancel即可自动下载SDK.  到这里我们软件就安装完成了 一路点击next我们就来到了下载组件的地方,我们全部下载就行.并等待下载完成.  但finish亮起时就代表下载完成,安装过程中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kotlin安卓开发">
+<meta property="og:url" content="https://tanzicai.github.io/2021/10/02/kotlin%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="TanBlogs">
+<meta property="og:description" content="开发环境搭建下载AndroidStudioGoogle官方下载地址 下载后进行安装,安装后打开可能会有提示信息  该页面是未找到SDKs,如果有的话点击setupProxy设置SDK路径,如果没有SDK就点击cancel即可自动下载SDK.  到这里我们软件就安装完成了 一路点击next我们就来到了下载组件的地方,我们全部下载就行.并等待下载完成.  但finish亮起时就代表下载完成,安装过程中">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002124511.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002124642.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002124817.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002125318.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002125331.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002125524.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002125704.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002125953.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002130201.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002131122.png">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002131733.png">
+<meta property="article:published_time" content="2021-10-02T04:31:11.000Z">
+<meta property="article:modified_time" content="2022-12-20T07:04:56.612Z">
+<meta property="article:author" content="Zicai Tan">
+<meta property="article:tag" content="kotlin">
+<meta property="article:tag" content="安卓开发">
+<meta property="article:tag" content="jet pack">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002124511.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>kotlin安卓开发 - TanBlogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tanzicai.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"__","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"always","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Bash"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-250117712-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21492855,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-250117712-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21492855.js');
+      }
+    </script>
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 50vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>TanBlogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="kotlin安卓开发"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Zicai Tan
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-10-02 12:31" pubdate>
+          2021年10月2日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">kotlin安卓开发</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：14 分钟前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="开发环境搭建"><a href="#开发环境搭建" class="headerlink" title="开发环境搭建"></a>开发环境搭建</h1><h2 id="下载AndroidStudio"><a href="#下载AndroidStudio" class="headerlink" title="下载AndroidStudio"></a>下载AndroidStudio</h2><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio/index.html">Google官方下载地址</a></p>
+<p>下载后进行安装,安装后打开可能会有提示信息</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002124511.png" srcset="/img/loading.gif" lazyload alt="image-20211002124503696"></p>
+<p>该页面是未找到SDKs,如果有的话点击setupProxy设置SDK路径,如果没有SDK就点击cancel即可自动下载SDK.</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002124642.png" srcset="/img/loading.gif" lazyload alt="image-20211002124642458"></p>
+<p>到这里我们软件就安装完成了</p>
+<p>一路点击next我们就来到了下载组件的地方,我们全部下载就行.并等待下载完成.</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002124817.png" srcset="/img/loading.gif" lazyload alt="image-20211002124817567"></p>
+<p>但finish亮起时就代表下载完成,安装过程中可能会请求管理员权限,</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002125318.png" srcset="/img/loading.gif" lazyload alt="image-20211002125318383"></p>
+<p>到这里我们的软件安装就结束了</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002125331.png" srcset="/img/loading.gif" lazyload alt="image-20211002125331168"></p>
+<h2 id="Tab项目创建"><a href="#Tab项目创建" class="headerlink" title="Tab项目创建"></a>Tab项目创建</h2><p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002125524.png" srcset="/img/loading.gif" lazyload alt="image-20211002125524350"></p>
+<p>点击新建项目后,我们选择<code>Button Navigation Activity</code>创建我们的第一个项目工程,这个模板是带有多tab导航切换的,也是最为熟悉的一种样式.</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002125704.png" srcset="/img/loading.gif" lazyload alt="image-20211002125704449"></p>
+<p>按照仔细的需求填写上面的各种信息就好,本次语言我们选择kotlin进行开发,miniSDK一般选择5.0就好,这里指定的是最低安卓安装版本.</p>
+<blockquote>
+<p>注意不要勾选Use legacy Android.support libraries,我们将使用google开源库</p>
+</blockquote>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002125953.png" srcset="/img/loading.gif" lazyload alt="image-20211002125953097"></p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002130201.png" srcset="/img/loading.gif" lazyload alt="image-20211002130200866"></p>
+<p>等待下载需要的库和其他配置,右下角有进度条</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002131122.png" srcset="/img/loading.gif" lazyload alt="image-20211002131122362"></p>
+<p>安装完成并初始化后就是这个界面,界面左边是文件目录树,中间是可视化控件区域,右边则是属性区域.</p>
+<p>接下来就是目录结构探究了</p>
+<h1 id="Android-Studio工程目录"><a href="#Android-Studio工程目录" class="headerlink" title="Android Studio工程目录"></a>Android Studio工程目录</h1><p><strong>1、.gradle和.idea</strong><br>    这两个目录下放置的都是Android Studio自动生成的一些文件，我们无须关心，也不要去手动编辑。<br><strong>2、app</strong><br>    项目中的代码、资源等内容几乎都是放置在这个目录下的，我们后面的开发工作也基本都是在这个目录下进行的，待会儿还会对这个目录单独展开进行讲解。<br><strong>3、build</strong><br>    这个目录你也不需要过多关心，它主要包含了一些在编译时自动生成的文件。<br><strong>4、gradle</strong><br>    这个目录下包含了gradle wrapper的配置文件，使用gradle wrapper的方式不需要提前将gradle下载好，而是会自动根据本地的缓存情况决定是否需要联网下载gradle。Android Studio默认没有启动gradle wrapper的方式，如果需要打开，可以点击Android Studio导航栏 –&gt; File –&gt; Settings –&gt; Build，Execution，Deployment –&gt; Gradle，进行配置更改。<br><strong>5、.gitignore</strong><br>    这个文件是用来将指定的目录或文件排除在版本控制之外的。<br><strong>6、build.gradle</strong><br>    这是项目全局的gradle构建脚本，通常这个文件中的内容是不需要修改的。下面会详细分析gradle构建脚本中的具体内容。<br><strong>7、gradle.properties</strong><br>    这个文件是全局的gradle配置文件，在这里配置的属性将会影响到项目中所有的gradle编译脚本。<br><strong>8、gradlew和gradlew.bat</strong><br>    这两个文件是用来在命令行界面中执行gradle命令的，其中gradlew是在Linux或Mac系统中使用的，gradlew.bat是在Windows系统中使用的。<br><strong>9、HelloWorld.iml</strong><br>    iml文件是所有IntelliJ IDEA项目都会自动生成的一个文件(Android Studio是基于IntelliJ IDEA开发的)，用于标识这是一个IntelliJ IDEA项目，我们不需要修改这个文件中的任何内容。<br><strong>10、local.properties</strong><br>    这个文件用于指定本机中的Android SDK路径，通常内容都是自动生成的，我们并不需要修改。除非你本机中的Android SDK位置发生了变化，那么就将这个文件中的路径改成新的位置即可。<br><strong>11、settings.gradle</strong><br>    这个文件用于指定项目中所有引入的模块。由于HelloWorld项目中就只有一个app模块，因此该文件中也就只引入了app这一个模块。通常情况下模块的引入都是自动完成的，需要我们手动去修改这个文件的场景可能比较少。</p>
+<h1 id="app目录结构"><a href="#app目录结构" class="headerlink" title="app目录结构"></a>app目录结构</h1><hr>
+<p>现在整个项目的外层目录结构已经介绍完了。你会发现，除了app目录之外，大多数的文件和目录都是自动生成的，我们并不需要进行修改。想必你已经猜到了，app目录下的内容才是我们以后的工作重点，展开之后结构如下：</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20211002131733.png" srcset="/img/loading.gif" lazyload alt="img"><br>    那么下面我们就来对app目录下的内容进行更为详细的分析。<br><strong>1、build</strong><br>    这个目录和外层的build目录类似，主要也是包含了一些在编译时自动生成的文件，不过它里面的内容会更多更杂，我们不需要过多关系。<br><strong>2、libs</strong><br>    如果你的项目中使用到了第三方jar包，就需要把这些jar包都放在libs目录下，放在这个目录下的jar包都会被自动添加到构建路径里去。<br><strong>3、AndroidTest</strong><br>    此处是用来编写Android Test测试用例的，可以对项目进行一些自动化测试。<br><strong>4、java</strong><br>    毫无疑问，java目录是放置我们所有java代码的地方，展开该目录，你将看到我们刚才创建的HelloWorldActivity文件就在里面。<br><strong>5、res</strong><br>    这个目录下的内容就有点多了。简单点说，就是你在项目中使用到的所有图片，布局，字符串等资源都要存放在这个目录下。当然这个目录下还有很多子目录，图片放在drawable目录下，布局放在layout目录下，字符串放在values目录下，所以你不用担心会把整个res目录弄得乱糟糟的。<br><strong>6、AndroidManifest.xml</strong><br>    这是你整个Android项目的配置文件，你在程序中定义的所以四大组件都需要在这个文件里注册，另外还可以在这个文件中给应用程序添加权限声明。<br><strong>7、test</strong><br>    此处是用来编写Unit Test测试用例的，是对项目进行自动化测试的另一种方式。<br><strong>8、.gitignore</strong><br>    这个文件用于将app模块内的指定的目录或文件排除在版本控制之外，作用和外层的.gitignore文件类似。<br><strong>9、app.iml</strong><br>    IntelliJ IDEA项目自动生成的文件，我们不需要关心或修改这个文件中的内容。<br><strong>10、build.gradle</strong><br>    这是app模块的gradle构建脚本，这个文件中会指定很多项目构建相关的配置。<br><strong>11、proguard-rules.pro</strong><br>    这个文件用于指定项目代码的混淆规则，当代码开发完成后打成安装包文件，如果不希望代码被别人破解，通常会将代码混淆，从而让破解者难以阅读。</p>
+<h1 id="项目中的资源"><a href="#项目中的资源" class="headerlink" title="项目中的资源"></a>项目中的资源</h1><hr>
+<p>如果你展开res目录看一下，其实里面的东西还是挺多的，很容易让人看得眼花缭乱:</p>
+<ul>
+<li>所有以drawable开头的文件夹都是用来放图片的，</li>
+<li>所有以mipmap开头的文件夹都是用来放应用图标的，</li>
+<li>所有以values开头的文件夹都是用来放字符串、样式、颜色等配置的，</li>
+<li>layout文件夹是用来放布局文件的。</li>
+</ul>
+<p>就明白了</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/kotlin/">#kotlin</a>
+      
+        <a href="/tags/%E5%AE%89%E5%8D%93%E5%BC%80%E5%8F%91/">#安卓开发</a>
+      
+        <a href="/tags/jet-pack/">#jet pack</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>kotlin安卓开发</div>
+      <div>https://tanzicai.github.io/2021/10/02/kotlin安卓开发/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Zicai Tan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2021年10月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="ND - 禁止演绎">
+                    <i class="iconfont icon-nd"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/02/AndroidUI/" title="AndroidUI">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">AndroidUI</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/30/6-kotlin%E5%AE%9E%E6%88%98%E5%9D%A6%E5%85%8B%E5%A4%A7%E6%88%98/" title="6-kotlin实战坦克大战">
+                        <span class="hidden-mobile">6-kotlin实战坦克大战</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://tanzicai.github.io/" target="_blank" rel="nofollow noopener"><span>TanBlogs</span></a> <i class="iconfont icon-love"></i> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

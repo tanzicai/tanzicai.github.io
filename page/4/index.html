@@ -1,0 +1,1038 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Zicai Tan">
+  <meta name="keywords" content="Blogs">
+  
+    <meta name="description" content="simple write">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TanBlogs">
+<meta property="og:url" content="https://tanzicai.github.io/page/4/index.html">
+<meta property="og:site_name" content="TanBlogs">
+<meta property="og:description" content="simple write">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Zicai Tan">
+<meta property="article:tag" content="Blogs">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>TanBlogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tanzicai.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"__","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"always","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Bash"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-250117712-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21492855,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-250117712-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21492855.js');
+      }
+    </script>
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>TanBlogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="狗熊岭的风 , 吹不到青青草原 , 我们也不会再见面"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/07/%E5%9F%BA%E4%BA%8ETCGA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%82%BE%E7%99%8C%E8%87%AA%E5%99%AC%E7%9B%B8%E5%85%B3%E5%9F%BA%E5%9B%A0%E9%A2%84%E5%90%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E5%BA%94%E7%94%A8%EF%BC%88%E5%AE%9E%E7%8E%B0%EF%BC%89/" target="_blank">
+          基于TCGA数据库筛选和肾癌（KIRC亚型）差异基因（实现）
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/06/07/%E5%9F%BA%E4%BA%8ETCGA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%82%BE%E7%99%8C%E8%87%AA%E5%99%AC%E7%9B%B8%E5%85%B3%E5%9F%BA%E5%9B%A0%E9%A2%84%E5%90%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E5%BA%94%E7%94%A8%EF%BC%88%E5%AE%9E%E7%8E%B0%EF%BC%89/" target="_blank">
+        <div>
+          1.数据下载1.1 网页下载   1.2 TCGABiolinks下载setwd(&quot;D:\Bioinformatics data analysis&quot;) if (!requireNamespace(&quot;BiocManager&quot;, quietly &#x3D; TRUE))    install.packages(&quot;BiocManager&quot;)
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-07 19:25" pubdate>
+              2021-06-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8C%BB%E5%AD%A6%E7%BB%9F%E8%AE%A1/" class="category-chain-item">医学统计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/TCGA/">#TCGA</a>
+            
+              <a href="/tags/RNA-Seq/">#RNA-Seq</a>
+            
+              <a href="/tags/%E8%82%BE%E7%99%8C/">#肾癌</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/07/TCGA%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%90%AB%E6%9C%89%E7%9A%84%E7%99%8C%E7%97%87%E5%90%8D%E7%A7%B0%E3%80%81%E7%AE%80%E5%86%99%E3%80%81%E4%B8%AD%E6%96%87%E5%90%8D%E7%A7%B0%E5%AF%B9%E7%85%A7%E8%A1%A8/" target="_blank">
+          TCGA数据库中含有的癌症名称、简写、中文名称对照表
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/05/07/TCGA%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%90%AB%E6%9C%89%E7%9A%84%E7%99%8C%E7%97%87%E5%90%8D%E7%A7%B0%E3%80%81%E7%AE%80%E5%86%99%E3%80%81%E4%B8%AD%E6%96%87%E5%90%8D%E7%A7%B0%E5%AF%B9%E7%85%A7%E8%A1%A8/" target="_blank">
+        <div>
+          Cohort 英文名称 中文名称    ACC Adrenocortical carcinoma 肾上腺皮质癌   BLCA Bladder Urothelial Carcinoma 膀胱尿路上皮癌   BRCA Breast invasive carcinoma 乳腺浸润癌   CESC Cervical squamous cell carcinoma and endocervical a
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-07 09:25" pubdate>
+              2021-05-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8C%BB%E5%AD%A6%E7%BB%9F%E8%AE%A1/" class="category-chain-item">医学统计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/TCGA/">#TCGA</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/07/TCGA%20%E7%9A%84%E5%B7%AE%E5%BC%82%E5%9F%BA%E5%9B%A0%E5%88%86%E6%9E%90/" target="_blank">
+          TCGA 差异基因分析
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/05/07/TCGA%20%E7%9A%84%E5%B7%AE%E5%BC%82%E5%9F%BA%E5%9B%A0%E5%88%86%E6%9E%90/" target="_blank">
+        <div>
+          TCGA数据库数据库简介肿瘤被认为是人类最复杂疾病之一, 目前为止人类已经发现了超过200种肿瘤亚型。肿瘤病人基因中发生的变化如体细胞突变、拷贝数变异、基因表达量差异和表观修饰变化与其特定的肿瘤亚型是相对应的。 **目的: **为了更好地发现、诊断和治疗肿瘤, 对其基因变化进行深入研究和建立相应数据库是目前所急需的。TCGA计划旨在通过大规模基因测序和综合性、多维度的分析手段来寻找由肿瘤发生发展造
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-07 09:25" pubdate>
+              2021-05-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8C%BB%E5%AD%A6%E7%BB%9F%E8%AE%A1/" class="category-chain-item">医学统计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/TCGA/">#TCGA</a>
+            
+              <a href="/tags/RNA-Seq/">#RNA-Seq</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/07/pheatmap%20%E7%9B%B8%E5%85%B3%E6%80%A7%E7%83%AD%E5%9B%BE%20%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E9%87%8F%E7%83%AD%E5%9B%BE/" target="_blank">
+          pheatmap 相关性热图 基因表达量热图
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/05/07/pheatmap%20%E7%9B%B8%E5%85%B3%E6%80%A7%E7%83%AD%E5%9B%BE%20%E5%9F%BA%E5%9B%A0%E8%A1%A8%E8%BE%BE%E9%87%8F%E7%83%AD%E5%9B%BE/" target="_blank">
+        <div>
+          作者：APExBIO链接：https://www.jianshu.com/p/9a5f8eef02fb来源：简书著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。  热图热图概念：热图是一个以颜色变化来显示数据的矩阵，可以简单地聚合大量数据，并使用一种渐进的色带直观地展现空间数据的相对大小。 热图在生物学中的应用：生物学中热图经常用于展示多个基因在不同样本中的表达水平。然后可以
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-07 09:25" pubdate>
+              2021-05-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8C%BB%E5%AD%A6%E7%BB%9F%E8%AE%A1/" class="category-chain-item">医学统计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/TCGA/">#TCGA</a>
+            
+              <a href="/tags/RNA-Seq/">#RNA-Seq</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/07/%E5%88%A9%E7%94%A8R%E5%8C%85TCGAbiolinks%E8%BF%9B%E8%A1%8C%E5%90%84%E7%A7%8D%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD/" target="_blank">
+          利用R包TCGAbiolinks进行各种数据下载
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/05/07/%E5%88%A9%E7%94%A8R%E5%8C%85TCGAbiolinks%E8%BF%9B%E8%A1%8C%E5%90%84%E7%A7%8D%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD/" target="_blank">
+        <div>
+          TCGAbiolinks的优点在于具备一体化的下载整合，无需再使用复杂的方法对下载的单个数据重新进行整合，换句话说，就是TCGAbiolinks包下载的数据是合并了的，不需要整理（TCGAbiolinks数据下载）。TCGAbiolinks的官方网站是：http://www.bioconductor.org/packages/devel/bioc/vignettes/TCGAbiolinks/in
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-07 09:25" pubdate>
+              2021-05-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8C%BB%E5%AD%A6%E7%BB%9F%E8%AE%A1/" class="category-chain-item">医学统计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/TCGA/">#TCGA</a>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD/">#数据下载</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/07/%E5%9F%BA%E4%BA%8ETCGA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%82%BE%E7%99%8C%E8%87%AA%E5%99%AC%E7%9B%B8%E5%85%B3%E5%9F%BA%E5%9B%A0%E9%A2%84%E5%90%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E5%BA%94%E7%94%A8/" target="_blank">
+          基于TCGA数据库筛选与胃癌预后相关的差异基因
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/05/07/%E5%9F%BA%E4%BA%8ETCGA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E8%82%BE%E7%99%8C%E8%87%AA%E5%99%AC%E7%9B%B8%E5%85%B3%E5%9F%BA%E5%9B%A0%E9%A2%84%E5%90%8E%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E5%BA%94%E7%94%A8/" target="_blank">
+        <div>
+          基于TCGA数据库筛选与胃癌预后相关的差异基因田如月 郭水龙 曹邦伟  首都医科大学附属北京友谊医院肿瘤中心 首都医科大学附属北京友谊医院消化内科国家消化系统疾病临床医学研究中心首都医科大学消化病学系  摘  要： 目的: 通过对癌症基因组图谱(TCGA)数据库中胃腺癌转录组数据进行分析，找出预后相关的差异表达基因。 方法 :从TCGA数据库中下载胃腺癌的转录组数据，利用R语言edgeR包筛选出差
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-07 09:25" pubdate>
+              2021-05-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8C%BB%E5%AD%A6%E7%BB%9F%E8%AE%A1/" class="category-chain-item">医学统计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/TCGA/">#TCGA</a>
+            
+              <a href="/tags/RNA-Seq/">#RNA-Seq</a>
+            
+              <a href="/tags/%E8%82%BE%E7%99%8C/">#肾癌</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/05/07/%E5%9F%BA%E4%BA%8ETCGA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AD%9B%E9%80%89%E4%B8%8E%E8%83%83%E7%99%8C%E9%A2%84%E5%90%8E%E7%9B%B8%E5%85%B3%E7%9A%84%E5%B7%AE%E5%BC%82%E5%9F%BA%E5%9B%A0/" target="_blank">
+          基于TCGA数据库筛选与胃癌预后相关的差异基因
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/05/07/%E5%9F%BA%E4%BA%8ETCGA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AD%9B%E9%80%89%E4%B8%8E%E8%83%83%E7%99%8C%E9%A2%84%E5%90%8E%E7%9B%B8%E5%85%B3%E7%9A%84%E5%B7%AE%E5%BC%82%E5%9F%BA%E5%9B%A0/" target="_blank">
+        <div>
+          基于TCGA数据库筛选与胃癌预后相关的差异基因田如月 郭水龙 曹邦伟  首都医科大学附属北京友谊医院肿瘤中心 首都医科大学附属北京友谊医院消化内科国家消化系统疾病临床医学研究中心首都医科大学消化病学系  摘  要： 目的: 通过对癌症基因组图谱(TCGA)数据库中胃腺癌转录组数据进行分析，找出预后相关的差异表达基因。 方法 :从TCGA数据库中下载胃腺癌的转录组数据，利用R语言edgeR包筛选出差
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-07 09:25" pubdate>
+              2021-05-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%8C%BB%E5%AD%A6%E7%BB%9F%E8%AE%A1/" class="category-chain-item">医学统计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/TCGA/">#TCGA</a>
+            
+              <a href="/tags/RNA-Seq/">#RNA-Seq</a>
+            
+              <a href="/tags/%E8%82%BE%E7%99%8C/">#肾癌</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/04/Web%E6%A6%82%E5%86%B5%E7%9F%A5%E8%AF%86/" target="_blank">
+          Web概况知识
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/04/04/Web%E6%A6%82%E5%86%B5%E7%9F%A5%E8%AF%86/" target="_blank">
+        <div>
+          Web运行原理原视频地址:https://www.bilibili.com/video/BV11p4y1H7eu视频作者:奇乐编程学院 Wen过程原理图人-&gt;浏览器:输入网址 浏览器-&gt;服务器: 发送http请求 服务器-&gt;浏览器: 根据请求返回对应类型文件(html)  HTML HTML文件一般由head标签、body标签组成，head头标签一般表明文档结构的相关属性。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-04 23:51" pubdate>
+              2021-04-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%89%8D%E7%AB%AF/" class="category-chain-item">前端</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%89%8D%E7%AB%AF/">#前端</a>
+            
+              <a href="/tags/HTML/">#HTML</a>
+            
+              <a href="/tags/%E5%A4%8D%E4%B9%A0/">#复习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/04/%E4%B8%80%E4%BB%BD%E5%A4%A7%E4%BD%AC%E7%9A%84%E6%8A%80%E8%83%BD%E6%B8%85%E5%8D%95/" target="_blank">
+          一份大佬的技能清单
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/04/04/%E4%B8%80%E4%BB%BD%E5%A4%A7%E4%BD%AC%E7%9A%84%E6%8A%80%E8%83%BD%E6%B8%85%E5%8D%95/" target="_blank">
+        <div>
+          1、熟悉html、css、JavaScript等前端基础技能 2、熟悉reactjs(react-router、react-hook、redux、redux-saga、redux-thunk)、vuejs(vuex.vue-router)，了解angularjs等前端主流技术栈 3、熟悉tarojs.ui-app等多端编译工具 4、熟悉nodejs及express、koaJs.eggjs、nest
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-04 23:26" pubdate>
+              2021-04-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%9F%A5%E8%AF%86%E6%B8%85%E5%8D%95/" class="category-chain-item">知识清单</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B8%85%E5%8D%95/">#清单</a>
+            
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%90%91/">#学习方向</a>
+            
+              <a href="/tags/%E6%8A%80%E8%83%BD/">#技能</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/03/31/Markdown%E5%85%AC%E5%BC%8F%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" target="_blank">
+          Markdown公式使用说明
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2021/03/31/Markdown%E5%85%AC%E5%BC%8F%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/" target="_blank">
+        <div>
+          Markdown数学公式语法本文为转载原文链接:https://www.jianshu.com/p/e74eb43960a1 行内与独行 行内公式：将公式插入到本行内，符号：$公式内容$，如：$xyz$ 独行公式：将公式插入到新的一行内，并且居中，符号：$$公式内容$$，如：$$xyz$$  上标、下标与组合 上标符号，符号：^，如：$x^4$  下标符号，符号：_，如：$x_1$  组合符号，符
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-31 19:17" pubdate>
+              2021-03-31
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/markdown/">#markdown</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://tanzicai.github.io/" target="_blank" rel="nofollow noopener"><span>TanBlogs</span></a> <i class="iconfont icon-love"></i> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

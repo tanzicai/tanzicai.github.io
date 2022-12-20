@@ -1,0 +1,978 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Smile">
+  <meta name="keywords" content="Blogs">
+  
+    <meta name="description" content="Java 嵌入 SPL 轻松实现 Excel 文件合并  转载自Smile转载源地址：	https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;54543045Smile  大多数JAVA程序猿都选择使用POI或者HSSFWorkbook等第三方类库来实现Excel自动化合并，这样一来不仅需要噼里啪啦的敲好多代码，费事费力，而且用起来灵活度也不高，对Excel的格式要求也很严格。如果能有一个专用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Java语言的excel文件合成操作">
+<meta property="og:url" content="https://tanzicai.github.io/2022/03/08/%E5%9F%BA%E4%BA%8EJava%E8%BF%9B%E8%A1%8Cexcel%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="TanBlogs">
+<meta property="og:description" content="Java 嵌入 SPL 轻松实现 Excel 文件合并  转载自Smile转载源地址：	https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;54543045Smile  大多数JAVA程序猿都选择使用POI或者HSSFWorkbook等第三方类库来实现Excel自动化合并，这样一来不仅需要噼里啪啦的敲好多代码，费事费力，而且用起来灵活度也不高，对Excel的格式要求也很严格。如果能有一个专用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210606213128.jpeg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210606213128.jpeg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210606213128.jpeg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210606213128.jpeg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210606213128.jpeg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210606213128.jpeg">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-4f5beaedb6f770834652a817aa2a5c42_b.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-dce5b7982afd2c1a55476b052d074d53_b.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-941bcfe40d33bbf5dd13269be5f16e62_b.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-0ae7a1596e286167ebd1de07a6ee4d17_b.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-0516d7dbd089cb79d6863a97acce9c65_b.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-89d65d7b984a087b4809c4bc1407bb51_b.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-2b00295ec76d17201f06d2178bae289f_b.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-b361134dc23cfb68770d765393ee2d33_b.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-8b5a294c8c4e78b1284a1eb34533e426_b.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/v2-d512d7d6c2cede80618898f6a563884a_b.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-ab3528f4e01da1c4c58225b4d7fae2ff_b.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-bc6911160e504046d24e5bd641554f41_b.jpg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-bea0209ec28b15a8c575262910e3d07e_b.jpg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-bea0209ec28b15a8c575262910e3d07e_b.jpg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-bea0209ec28b15a8c575262910e3d07e_b.jpg">
+<meta property="og:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-bea0209ec28b15a8c575262910e3d07e_b.jpg">
+<meta property="article:published_time" content="2022-03-08T11:56:52.000Z">
+<meta property="article:modified_time" content="2022-12-20T07:04:57.175Z">
+<meta property="article:author" content="Zicai Tan">
+<meta property="article:tag" content="excel">
+<meta property="article:tag" content="文件操作">
+<meta property="article:tag" content="数据合并">
+<meta property="article:tag" content="R语言">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>基于Java语言的excel文件合成操作 - TanBlogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"tanzicai.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"__","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"always","icon":"❡"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"Bash"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":"UA-250117712-1","gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":21492855,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":true}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'UA-250117712-1', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+    <!-- 51.la Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('//js.users.51.la/21492855.js');
+      }
+    </script>
+  
+
+  
+
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 50vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>TanBlogs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="基于Java语言的excel文件合成操作"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Smile
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-03-08 19:56" pubdate>
+          2022年3月8日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          42 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">基于Java语言的excel文件合成操作</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：14 分钟前
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Java-嵌入-SPL-轻松实现-Excel-文件合并"><a href="#Java-嵌入-SPL-轻松实现-Excel-文件合并" class="headerlink" title="Java 嵌入 SPL 轻松实现 Excel 文件合并"></a>Java 嵌入 SPL 轻松实现 Excel 文件合并</h1><blockquote>
+<p> 转载自Smile<br>转载源地址：	<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/54543045">https://zhuanlan.zhihu.com/p/54543045</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/people/smile-33-15">Smile</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/people/smile-33-15"><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg" srcset="/img/loading.gif" lazyload alt="Smile"></a></p>
+</blockquote>
+<p>大多数JAVA程序猿都选择使用POI或者HSSFWorkbook等第三方类库来实现Excel自动化合并，这样一来不仅需要噼里啪啦的敲好多代码，费事费力，而且用起来灵活度也不高，对Excel的格式要求也很严格。如果能有一个专用的外部数据工具，写简单类似SQL的脚本来实现，然后在JAVA中直接调用并返回结果集，就再好不过了。润乾集算器就是这样的机制，通过使用JDBC调用SPL脚本，使用起来方便快捷，下面就来学习下具体如何使用。</p>
+<h2 id="SPL实现"><a href="#SPL实现" class="headerlink" title="SPL实现"></a>SPL实现</h2><p><strong>常规合并：</strong></p>
+<p>A. 同一个 excel 中的多个Sheet表合并</p>
+<p>下面的例子是一个包含了销售数据的 excel 文件，其中包含了按月划分的 3 个结构相同的 sheet 工作表，数据如下：</p>
+<p>January_2013:</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>February_2013:</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>March_2013:</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>在合并3个Sheet的同时，我们还可以同时从每个sheet中筛选出字段Customer Name, Sale Amount。最后的效果如下：</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><strong>SPL</strong> <strong>脚本：</strong></p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-37059d62de382089f3a44ece6df70031_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>保存脚本文件<strong>oneExcel.dfx</strong>(嵌入Java会用到)</p>
+<p>脚本说明：</p>
+<p><strong>A1</strong>: 打开指定的 excel 文件，创建一个由多个 sheet 工作表组成的序列。</p>
+<p><strong>A2</strong>：利用 conj 函数遍历 A1 序列中所有的成员工作表，导入每个工作表中指定列’Customer Name’,’Sale Amount’，并将数据并合并。其中 xlsimport 函数导入指定列，最后一列用分号; 隔开。 参数~.stname表示指定当前工作表，由于在 conj 函数的循环中，所以就可以逐个导入所有工作表。同时，xlsimport 使用选项@t指明将工作表的第一行记录作为字段名。</p>
+<p><strong>A3:</strong> 将序表 A2 作为一个新的工作表“merge_sheets”保存到原来的 excel 文件中，同样用选项 @t 指明首行记录为标题。</p>
+<p>这段脚本只有三句话，短小精干之余，逻辑清晰，也比较容易理解。下面我们再看看如何合并多个文件中的多个工作表。</p>
+<p>B. 不同 excel 中的多表合并</p>
+<p>下面是要合并的多个 excel 文件，它们都具有和上面例子相同的表结构，每个文件记录了当年的数据<strong>：</strong><br><strong>SPL</strong> <strong>脚本：</strong></p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210606213128.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><strong>合并后的结果如下：</strong></p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210606213128.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>保存脚本文件<strong>MergeExcels.dfx</strong>(嵌入Java会用到)</p>
+<p>脚本说明：</p>
+<p><strong>A1</strong>: 通过 for 循环，遍历指定目录下的 excel 文件，在 B1 到 B3 之间进行循环内处理。</p>
+<p><strong>B1</strong>：打开目录下的一个 excel 文件，生成序列。</p>
+<p><strong>B2</strong>：导入当前文件中的每个 sheet 工作表中指定列’Customer Name’,’Sale Amount’，’Purchase Date’的数据，然后合并这些数据，与前面例子中的 A2 类似。</p>
+<p><strong>B3</strong>：将序表 B2 的数据与 @表示的本网格的值进行合并。</p>
+<p><strong>A4</strong>：将序表 B3 保存到result.xlsx文件中的 merge_data 工作表中。</p>
+<p>上面程序用两个循环就实现了多个 excel 文件数据合并，外循环 for 遍历了目录下所有的 excel 文件，内循环B1.conj则合并每个excel文件中的多个sheet工作表的数据。</p>
+<p>C. 合并出大文件</p>
+<p>前面第一个例子中的 A2、第二个例子中的 B3 都是在内存中装载了合并后的 Excel 的所有数据，然后一次性写出。如果文件太多太大，那么对内存的占用也会很大，甚至超出内存允许的范围。为此，我们可以在SPL脚本中采用流式追加的方式生成大文件。</p>
+<p><strong>SPL脚本：</strong></p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210606213128.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><strong>合并后的效果如下：</strong></p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210606213128.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>保存脚本文件<strong>BigExcel.dfx</strong>(嵌入Java会用到)</p>
+<p>脚本说明：</p>
+<p><strong>A1</strong>：打开指定输出的文件。</p>
+<p>A2：遍历目录下需要合并的 excel 文件。</p>
+<p>B2：打开一个需要合并的 excel 文件。</p>
+<p>B3：如果输出文件不存在，读取 sheet 工作表的所有数据，包括标题行；如果输出文件已经有了，就通过 @t 选项指明第一行是标题，从第二行开始读取数据。</p>
+<p>B4：将 B3 读取的数据以流式追加到 A1 指定的输出文件的 merger 工作表中。</p>
+<p>通过流式逐个读取文件数据后追加写入，这个方式适合将大量小的 excel 文件合并成一个大的 excel 文件。</p>
+<h2 id="JAVA调用"><a href="#JAVA调用" class="headerlink" title="JAVA调用"></a>JAVA调用</h2><p>SPL嵌入到Java应用程序十分方便，通过JDBC调用存储过程方法加载，用<strong>同一个excel中的多个Sheet表合并</strong>保存的文件OneExcel.dfx，示例调用如下：</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">...
+Connection con = null;
+Class.forName("com.esproc.jdbc.InternalDriver");
+con= DriverManager.getConnection("jdbc:esproc:local://");//调用存储过程，其中OneExcel是dfx的文件名
+st =(com. esproc.jdbc.InternalCStatement)con.prepareCall("call OneExcel()");//执行存储过程
+st.execute();//获取结果集
+ResultSet rs = st.getResultSet();
+...<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+
+<p>替换成MergeExcels.dfx&#x2F;BigExcel.dfx是同样的道理，只需call MergeExcels()或者call BigExcel()即可。这里只用 Java 片段粗略解释了如何嵌入 SPL，详细步骤请参阅<a href="https://link.zhihu.com/?target=http://c.raqsoft.com.cn/article/1543657951867">Java 如何调用 SPL 脚本</a>，也非常简单，不再赘述。同时，SPL 也支持 ODBC 驱动，集成到支持 ODBC 的语言，嵌入过程类似。</p>
+<h2 id="拓展节选"><a href="#拓展节选" class="headerlink" title="拓展节选"></a>拓展节选</h2><p>关于Excel文件的处理除了像上面讲的普通合并外，还可以在SPL脚本中对汇总后的结果分组去重，然后再将结果集导出。</p>
+<p><strong>分组汇总</strong></p>
+<p>下面继续以前面的销售数据 excel 文件为例。</p>
+<p><strong>A. 字段分组</strong></p>
+<p>根据某个字段或多个字段实现分组计算，SPL 脚本如下：</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210606213128.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>A3<strong>的效果：</strong></p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/20210606213128.jpeg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>A4<strong>的效果：</strong></p>
+<p><img src="https://pic3.zhimg.com/v2-4f5beaedb6f770834652a817aa2a5c42_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>脚本说明：</p>
+<p><strong>A1</strong>: 打开指定的 excel 文件。</p>
+<p><strong>A2</strong>：读取并合并文件中所有 sheet 工作表的数据。</p>
+<p><strong>A3</strong>：在合并后的数据上按字段 ‘Customer ID’ 分组求销售额、平均值。</p>
+<p><strong>A4</strong>：在合并后的数据上按字段 ‘Customer ID’, ‘Purchase Date’ 分组求销售额。</p>
+<p><strong>B. 按序分组</strong></p>
+<p>集算器在进行分组聚合时还可以和相邻数据行对比，在原数据已经有序时可以不再排序，从而节省时间，并保持原有的次序。假设原数据已经按日期排序，我们想按月份分组统计时，代码如下。</p>
+<p>SPL 脚本：</p>
+<p><img src="https://pic4.zhimg.com/v2-dce5b7982afd2c1a55476b052d074d53_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>A5 分组效果：</p>
+<p><img src="https://pic3.zhimg.com/v2-941bcfe40d33bbf5dd13269be5f16e62_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>A6 分组效果：</p>
+<p><img src="https://pic4.zhimg.com/v2-0ae7a1596e286167ebd1de07a6ee4d17_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>脚本说明：</p>
+<p><strong>A1至B3</strong>: 在前面的例子中已经介绍，将同一目录下所有相同结构的 excel 文件的工作表进行合并。</p>
+<p><strong>A4</strong>：在序表 B3 的基本上重新构造了一个序表 A4，将日期拆分，新增年、月字段。</p>
+<p><strong>A5</strong>：groups 跨年度按月分组汇总销售额、平均值。</p>
+<p><strong>A6</strong>：groups@o 按年月分组汇总销售额、平均值, 带参数 @o 实现分组归并处理。</p>
+<p>其中，A4 为数据记录明细；A5 按月统计, 不区分年；A6 则按年月统计。这三个单元格中的数据展现出了不同层次的合并汇总结果。</p>
+<p><strong>C. 分段分组</strong></p>
+<p>将要统计的数据按条件分成几段，统计各组的情况。</p>
+<p>SPL 脚本：</p>
+<p><img src="https://pic2.zhimg.com/v2-0516d7dbd089cb79d6863a97acce9c65_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>分组效果：</p>
+<p><img src="https://pic2.zhimg.com/v2-89d65d7b984a087b4809c4bc1407bb51_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>代码说明：</p>
+<p>步骤A1到 B3 之间参考前面例子的说明。</p>
+<p>A4：字段’Sale Amount’金额的范围分成 5 段，然后累计求出各段的数量及总数。</p>
+<p>不过，这样的写法不够方便，如果我们想调整分段方案，就需要修改 groups 函数的参数，而这个参数表达式还是比较复杂的。这时，我们还可以利用集算器中另一个 pseg 函数，更方便地实现这个功能，脚本如下：</p>
+<p><img src="https://pic4.zhimg.com/v2-2b00295ec76d17201f06d2178bae289f_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>当然，我们也可以根据需要，按不同字段不同要求进行分组，然后进行统计处理。例如，在统计班级考生成绩时，各科成绩可划分成优、良、中、差、及格的分数区段，一次为条件进行统计。groups 用法还有很多，可以参考函数手册中相应的章节。</p>
+<p><strong>D. 大数据分组</strong></p>
+<p>前面的例子中，要读取的 excel 文件都不能很大，也就是都能一次读进内存。手工处理大文件，也会有类似的要求，因为同时打开多个文件，意味着把这些文件都装入内存，很可能会超过机器的物理内存，而用 VBA 读取的情况也差不多。这时，我们就需要用流式的方法读取数据，不需一次读进内存，而是边读取边合并。</p>
+<p>SPL 脚本：</p>
+<p><img src="https://pic4.zhimg.com/v2-b361134dc23cfb68770d765393ee2d33_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>筛选分组的效果：</p>
+<p><img src="https://pic3.zhimg.com/v2-8b5a294c8c4e78b1284a1eb34533e426_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>代码说明：</p>
+<p><strong>A1</strong>: 使用 @r 选项指明以流式打开 excel 文件。</p>
+<p><strong>A2</strong>：遍历 excel 中的 sheet 工作表。</p>
+<p><strong>B2</strong>：使用 @c 选项指明以游标方式导入数据。</p>
+<p><strong>B3</strong>：将游标B2汇集到B3序列中。</p>
+<p><strong>A4</strong>：将游标序列B3的成员合并到一起组成新的游标。</p>
+<p>B4：序列A4按‘Customer ID’分组累计‘Sale Amount’。</p>
+<p>A5：将结果保存。</p>
+<p>通过游标以流的方式循环从大文件中读取一段段数据，实现对数据的分组合并。</p>
+<p><strong>去重处理</strong></p>
+<p>实际数据合并过程中，往往会出现数据重复的现象，重复数据肯定会影响到我们对数据的计算分析。下面介绍使用集算器 SPL 脚本去除重复数据的几种主要解决方法。</p>
+<p><strong>A. 主键去重</strong></p>
+<p>sales_2013中的数据，设其主键为’Invoice Number’，则根据主键去掉重复记录。</p>
+<p><img src="https://pic3.zhimg.com/v2-d512d7d6c2cede80618898f6a563884a_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>合并去重后的数据：</p>
+<p><img src="https://pic4.zhimg.com/v2-ab3528f4e01da1c4c58225b4d7fae2ff_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>代码说明：</p>
+<p><strong>A1</strong>: 打开指定的 excel 文件。</p>
+<p>A2：导入 sheet 工作表中指定列的数据。</p>
+<p>A3：将序表 A2 按主键’Invoice Number’分组去重处理, 其中参数 @1 表示取每一个分组的第一条记录组成排列后返回（注意是数字 1，不是字母 l）。</p>
+<p>A4：将结果保存。</p>
+<p>各个 sheet&gt; 中的数据是唯一的，但合并的数据不一定是唯一的，因此采用主键方式去掉重复数据。</p>
+<p><strong>B. 某字段去重</strong></p>
+<p>根据数据表 sales_2013 中的某字段去重处理, 查看不同姓名的雇员记录.</p>
+<p><img src="https://pic2.zhimg.com/v2-bc6911160e504046d24e5bd641554f41_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>代码说明：</p>
+<p><strong>A1</strong>: 打开指定的 excel 文件。</p>
+<p>A2：导入 sheet 工作表中指定列的数据。</p>
+<p>A3：从序表 A2 中获取不重复姓名的记录。</p>
+<p>A4：从序表 A2中获取不重复姓名的记录列表。</p>
+<p>A5：将序表 A4 另存，首行记录为标题。</p>
+<p>A3 数据去重结果：</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-bea0209ec28b15a8c575262910e3d07e_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>A4 数据去重结果：</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-bea0209ec28b15a8c575262910e3d07e_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p><strong>C. 联合多字段去重</strong></p>
+<p>有的记录虽然有主键，但判断是否为重复的记录，需要用其它几个字段来确定，此时用多个字段联合来确定是否有重复记录.</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-bea0209ec28b15a8c575262910e3d07e_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>代码说明：</p>
+<p><strong>A1</strong>: 导入指定 excel 文件的数据。</p>
+<p>A2：同上。</p>
+<p>A3：按字段 ‘Customer ID’, ‘Purchase Date’ 合并序表 A1，A2，返回序表 A3。</p>
+<p>A4：序表 A3 按 ‘Customer ID’, ‘Purchase Date’ 分组去重。</p>
+<p>A5：将结果保存。</p>
+<p>当然，也可以根据需要，参考更多的字段进行分组合并，去掉重复记录。</p>
+<p><strong>D. 记录级去重</strong></p>
+<p>解决要合并的每个文件中的记录本身是不重复的，但合并后可能存在重复记录。</p>
+<p><img src="https://gitee.com/tanzicai/drawingbed/raw/master/img/v2-bea0209ec28b15a8c575262910e3d07e_b.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>代码说明：</p>
+<p><strong>A1</strong>: 导入 excel 文件的数据。</p>
+<p>B1：根据字段’Invoice Number’去掉序表 A1中的重复数据。</p>
+<p>A2、B2：同上</p>
+<p>A3：合并序表 B1，B2 的数据，并去掉重复数据记录返回序表 A3。选项 @u 表示序表成员按顺序合并到一起组成新的序表, 去掉重复的记录。</p>
+<p>B3：查看合并后的数据记录数。</p>
+<p>merge@u适合对多序表合并处理, 其中序表内部有序且无重复数据。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>使用SPL处理同构&#x2F;异构excel 多文件合并、分组汇总数据及数据去重时，都是只要把需要合并的字段读成集算器的集合对象就可以了。学会了用这种专业数据处理工具，不仅能合并 Excel 文件, 合并其他文本数据方法也是一致的，再也不用担心合并数据中的多文件、大文件和结构差异问题了。</p>
+<h2 id="SPL优势"><a href="#SPL优势" class="headerlink" title="SPL优势"></a>SPL优势</h2><ul>
+<li><strong>有库写 SQL，没库写 SPL</strong></li>
+</ul>
+<p>用Java程序直接汇总计算数据，还是比较累的，代码很长，并且不可复用，很多情况数据也不在数据库里，有了SPL，就能像在Java中用SQL一样了，十分方便。</p>
+<ul>
+<li><strong>常用无忧，不花钱就能取得终身使用权的入门版</strong></li>
+</ul>
+<p>如果要分析的数据是一次性或临时性的，润乾集算器每个月都提供免费试用授权，可以循环免费使用。但要和Java应用程序集成起来部署到服务器上长期使用，定期更换试用授权还是比较麻烦，润乾提供了有终身使用权的入门版，解决了这个后顾之忧，获得方式参考 <a href="https://link.zhihu.com/?target=http://c.raqsoft.com.cn/article/1543548311985">如何免费使用润乾集算器？</a></p>
+<ul>
+<li><strong>技术文档和社区支持</strong></li>
+</ul>
+<p>官方提供的<a href="https://link.zhihu.com/?target=http://c.raqsoft.com.cn/forward?goto=http://doc.raqsoft.com.cn">集算器技术文档</a>本身就有很多现成的例子，常规问题从文档里都能找到解决方法。如果获得了入门版，不仅能够使用SPL的常规功能，碰到任何问题都可以去<a href="https://link.zhihu.com/?target=http://c.raqsoft.com.cn/">乾学院</a>上去咨询，官方通过该社区对入门版用户提供免费的技术支持。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/excel%E6%93%8D%E4%BD%9C/" class="category-chain-item">excel操作</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/excel/">#excel</a>
+      
+        <a href="/tags/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/">#文件操作</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%90%88%E5%B9%B6/">#数据合并</a>
+      
+        <a href="/tags/R%E8%AF%AD%E8%A8%80/">#R语言</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>基于Java语言的excel文件合成操作</div>
+      <div>https://tanzicai.github.io/2022/03/08/基于Java进行excel数据处理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Smile</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年3月8日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2022年12月20日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="ND - 禁止演绎">
+                    <i class="iconfont icon-nd"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/11/25/JAVA%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF(%E5%9F%BA%E7%A1%80)-%E7%AC%AC%E4%B8%80%E7%AB%A0Java%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%A6%82%E8%BF%B0/" title="JAVA核心技术(基础)-第一章Java程序设计概述">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JAVA核心技术(基础)-第一章Java程序设计概述</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/08/%E5%9F%BA%E4%BA%8ER%E8%AF%AD%E8%A8%80%E7%9A%84excel%E5%90%88%E5%B9%B6%E6%93%8D%E4%BD%9C/" title="基于R语言的excel文件合成操作">
+                        <span class="hidden-mobile">基于R语言的excel文件合成操作</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://tanzicai.github.io/" target="_blank" rel="nofollow noopener"><span>TanBlogs</span></a> <i class="iconfont icon-love"></i> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.28.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
