@@ -1005,31 +1005,6 @@
   
   
   <entry>
-    <title>TCGA数据库中含有的癌症名称、简写、中文名称对照表</title>
-    <link href="/2021/05/07/TCGA%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%90%AB%E6%9C%89%E7%9A%84%E7%99%8C%E7%97%87%E5%90%8D%E7%A7%B0%E3%80%81%E7%AE%80%E5%86%99%E3%80%81%E4%B8%AD%E6%96%87%E5%90%8D%E7%A7%B0%E5%AF%B9%E7%85%A7%E8%A1%A8/"/>
-    <url>/2021/05/07/TCGA%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%90%AB%E6%9C%89%E7%9A%84%E7%99%8C%E7%97%87%E5%90%8D%E7%A7%B0%E3%80%81%E7%AE%80%E5%86%99%E3%80%81%E4%B8%AD%E6%96%87%E5%90%8D%E7%A7%B0%E5%AF%B9%E7%85%A7%E8%A1%A8/</url>
-    
-    <content type="html"><![CDATA[<table><thead><tr><th>Cohort</th><th align="left">英文名称</th><th>中文名称</th></tr></thead><tbody><tr><td>ACC</td><td align="left">Adrenocortical carcinoma</td><td>肾上腺皮质癌</td></tr><tr><td>BLCA</td><td align="left">Bladder Urothelial Carcinoma</td><td>膀胱尿路上皮癌</td></tr><tr><td>BRCA</td><td align="left">Breast invasive carcinoma</td><td>乳腺浸润癌</td></tr><tr><td>CESC</td><td align="left">Cervical squamous cell carcinoma and endocervical adenocarcinoma</td><td>宫颈鳞癌和腺癌</td></tr><tr><td>CHOL</td><td align="left">Cholangiocarcinoma</td><td>胆管癌</td></tr><tr><td>COAD</td><td align="left">Colon adenocarcinoma</td><td>结肠癌</td></tr><tr><td>COADREAD</td><td align="left">Colon adenocarcinoma&#x2F;Rectum adenocarcinoma Esophageal carcinoma</td><td>结直肠癌</td></tr><tr><td>DLBC</td><td align="left">Lymphoid Neoplasm Diffuse Large B-cell Lymphoma</td><td>弥漫性大B细胞淋巴瘤</td></tr><tr><td>ESCA</td><td align="left">Esophageal carcinoma</td><td>食管癌</td></tr><tr><td>FPPP</td><td align="left">FFPE Pilot Phase II</td><td>FFPE试点二期</td></tr><tr><td>GBM</td><td align="left">Glioblastoma multiforme</td><td>多形成性胶质细胞瘤</td></tr><tr><td>GBMLGG</td><td align="left">Glioma</td><td>胶质瘤</td></tr><tr><td>HNSC</td><td align="left">Head and Neck squamous cell carcinoma</td><td>头颈鳞状细胞癌</td></tr><tr><td>KICH</td><td align="left">Kidney Chromophobe</td><td>肾嫌色细胞癌</td></tr><tr><td>KIPAN</td><td align="left">Pan-kidney cohort (KICH+KIRC+KIRP)</td><td>混合肾癌</td></tr><tr><td>KIRC</td><td align="left">Kidney renal clear cell carcinoma</td><td>肾透明细胞癌</td></tr><tr><td>KIRP</td><td align="left">Kidney renal papillary cell carcinoma</td><td>肾乳头状细胞癌</td></tr><tr><td>LAML</td><td align="left">Acute Myeloid Leukemia</td><td>急性髓细胞样白血病</td></tr><tr><td>LGG</td><td align="left">Brain Lower Grade Glioma</td><td>脑低级别胶质瘤</td></tr><tr><td>LIHC</td><td align="left">Liver hepatocellular carcinoma</td><td>肝细胞肝癌</td></tr><tr><td>LUAD</td><td align="left">Lung adenocarcinoma</td><td>肺腺癌</td></tr><tr><td>LUSC</td><td align="left">Lung squamous cell carcinoma</td><td>肺鳞癌</td></tr><tr><td>MESO</td><td align="left">Mesothelioma</td><td>间皮瘤</td></tr><tr><td>OV</td><td align="left">Ovarian serous cystadenocarcinoma</td><td>卵巢浆液性囊腺癌</td></tr><tr><td>PAAD</td><td align="left">Pancreatic adenocarcinoma</td><td>胰腺癌</td></tr><tr><td>PCPG</td><td align="left">Pheochromocytoma and Paraganglioma</td><td>嗜铬细胞瘤和副神经节瘤</td></tr><tr><td>PRAD</td><td align="left">Prostate adenocarcinoma</td><td>前列腺癌</td></tr><tr><td>READ</td><td align="left">Rectum adenocarcinoma</td><td>直肠腺癌</td></tr><tr><td>SARC</td><td align="left">Sarcoma</td><td>肉瘤</td></tr><tr><td>SKCM</td><td align="left">Skin Cutaneous Melanoma</td><td>皮肤黑色素瘤</td></tr><tr><td>STAD</td><td align="left">Stomach adenocarcinoma</td><td>胃癌</td></tr><tr><td>STES</td><td align="left">Stomach and Esophageal carcinoma</td><td>胃和食管癌</td></tr><tr><td>TGCT</td><td align="left">Testicular Germ Cell Tumors</td><td>睾丸癌</td></tr><tr><td>THCA</td><td align="left">Thyroid carcinoma</td><td>甲状腺癌</td></tr><tr><td>THYM</td><td align="left">Thymoma</td><td>胸腺癌</td></tr><tr><td>UCEC</td><td align="left">Uterine Corpus Endometrial Carcinoma</td><td>子宫内膜癌</td></tr><tr><td>UCS</td><td align="left">Uterine Carcinosarcoma</td><td>子宫肉瘤</td></tr><tr><td>UVM</td><td align="left">Uveal Melanoma</td><td></td></tr></tbody></table>]]></content>
-    
-    
-    <categories>
-      
-      <category>医学统计</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>TCGA</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>TCGA 差异基因分析</title>
     <link href="/2021/05/07/TCGA%20%E7%9A%84%E5%B7%AE%E5%BC%82%E5%9F%BA%E5%9B%A0%E5%88%86%E6%9E%90/"/>
     <url>/2021/05/07/TCGA%20%E7%9A%84%E5%B7%AE%E5%BC%82%E5%9F%BA%E5%9B%A0%E5%88%86%E6%9E%90/</url>
@@ -1049,6 +1024,31 @@
       <tag>TCGA</tag>
       
       <tag>RNA-Seq</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>TCGA数据库中含有的癌症名称、简写、中文名称对照表</title>
+    <link href="/2021/05/07/TCGA%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%90%AB%E6%9C%89%E7%9A%84%E7%99%8C%E7%97%87%E5%90%8D%E7%A7%B0%E3%80%81%E7%AE%80%E5%86%99%E3%80%81%E4%B8%AD%E6%96%87%E5%90%8D%E7%A7%B0%E5%AF%B9%E7%85%A7%E8%A1%A8/"/>
+    <url>/2021/05/07/TCGA%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%90%AB%E6%9C%89%E7%9A%84%E7%99%8C%E7%97%87%E5%90%8D%E7%A7%B0%E3%80%81%E7%AE%80%E5%86%99%E3%80%81%E4%B8%AD%E6%96%87%E5%90%8D%E7%A7%B0%E5%AF%B9%E7%85%A7%E8%A1%A8/</url>
+    
+    <content type="html"><![CDATA[<table><thead><tr><th>Cohort</th><th align="left">英文名称</th><th>中文名称</th></tr></thead><tbody><tr><td>ACC</td><td align="left">Adrenocortical carcinoma</td><td>肾上腺皮质癌</td></tr><tr><td>BLCA</td><td align="left">Bladder Urothelial Carcinoma</td><td>膀胱尿路上皮癌</td></tr><tr><td>BRCA</td><td align="left">Breast invasive carcinoma</td><td>乳腺浸润癌</td></tr><tr><td>CESC</td><td align="left">Cervical squamous cell carcinoma and endocervical adenocarcinoma</td><td>宫颈鳞癌和腺癌</td></tr><tr><td>CHOL</td><td align="left">Cholangiocarcinoma</td><td>胆管癌</td></tr><tr><td>COAD</td><td align="left">Colon adenocarcinoma</td><td>结肠癌</td></tr><tr><td>COADREAD</td><td align="left">Colon adenocarcinoma&#x2F;Rectum adenocarcinoma Esophageal carcinoma</td><td>结直肠癌</td></tr><tr><td>DLBC</td><td align="left">Lymphoid Neoplasm Diffuse Large B-cell Lymphoma</td><td>弥漫性大B细胞淋巴瘤</td></tr><tr><td>ESCA</td><td align="left">Esophageal carcinoma</td><td>食管癌</td></tr><tr><td>FPPP</td><td align="left">FFPE Pilot Phase II</td><td>FFPE试点二期</td></tr><tr><td>GBM</td><td align="left">Glioblastoma multiforme</td><td>多形成性胶质细胞瘤</td></tr><tr><td>GBMLGG</td><td align="left">Glioma</td><td>胶质瘤</td></tr><tr><td>HNSC</td><td align="left">Head and Neck squamous cell carcinoma</td><td>头颈鳞状细胞癌</td></tr><tr><td>KICH</td><td align="left">Kidney Chromophobe</td><td>肾嫌色细胞癌</td></tr><tr><td>KIPAN</td><td align="left">Pan-kidney cohort (KICH+KIRC+KIRP)</td><td>混合肾癌</td></tr><tr><td>KIRC</td><td align="left">Kidney renal clear cell carcinoma</td><td>肾透明细胞癌</td></tr><tr><td>KIRP</td><td align="left">Kidney renal papillary cell carcinoma</td><td>肾乳头状细胞癌</td></tr><tr><td>LAML</td><td align="left">Acute Myeloid Leukemia</td><td>急性髓细胞样白血病</td></tr><tr><td>LGG</td><td align="left">Brain Lower Grade Glioma</td><td>脑低级别胶质瘤</td></tr><tr><td>LIHC</td><td align="left">Liver hepatocellular carcinoma</td><td>肝细胞肝癌</td></tr><tr><td>LUAD</td><td align="left">Lung adenocarcinoma</td><td>肺腺癌</td></tr><tr><td>LUSC</td><td align="left">Lung squamous cell carcinoma</td><td>肺鳞癌</td></tr><tr><td>MESO</td><td align="left">Mesothelioma</td><td>间皮瘤</td></tr><tr><td>OV</td><td align="left">Ovarian serous cystadenocarcinoma</td><td>卵巢浆液性囊腺癌</td></tr><tr><td>PAAD</td><td align="left">Pancreatic adenocarcinoma</td><td>胰腺癌</td></tr><tr><td>PCPG</td><td align="left">Pheochromocytoma and Paraganglioma</td><td>嗜铬细胞瘤和副神经节瘤</td></tr><tr><td>PRAD</td><td align="left">Prostate adenocarcinoma</td><td>前列腺癌</td></tr><tr><td>READ</td><td align="left">Rectum adenocarcinoma</td><td>直肠腺癌</td></tr><tr><td>SARC</td><td align="left">Sarcoma</td><td>肉瘤</td></tr><tr><td>SKCM</td><td align="left">Skin Cutaneous Melanoma</td><td>皮肤黑色素瘤</td></tr><tr><td>STAD</td><td align="left">Stomach adenocarcinoma</td><td>胃癌</td></tr><tr><td>STES</td><td align="left">Stomach and Esophageal carcinoma</td><td>胃和食管癌</td></tr><tr><td>TGCT</td><td align="left">Testicular Germ Cell Tumors</td><td>睾丸癌</td></tr><tr><td>THCA</td><td align="left">Thyroid carcinoma</td><td>甲状腺癌</td></tr><tr><td>THYM</td><td align="left">Thymoma</td><td>胸腺癌</td></tr><tr><td>UCEC</td><td align="left">Uterine Corpus Endometrial Carcinoma</td><td>子宫内膜癌</td></tr><tr><td>UCS</td><td align="left">Uterine Carcinosarcoma</td><td>子宫肉瘤</td></tr><tr><td>UVM</td><td align="left">Uveal Melanoma</td><td></td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>医学统计</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>TCGA</tag>
       
     </tags>
     
@@ -1382,9 +1382,9 @@
       
       <tag>时钟</tag>
       
-      <tag>实践</tag>
-      
       <tag>Java</tag>
+      
+      <tag>实践</tag>
       
     </tags>
     
