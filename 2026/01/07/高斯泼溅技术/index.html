@@ -1,0 +1,717 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="tanzicai">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="技术解释和底层技术 3DGS的原理是基于对高斯基元的数学建模和高效的 GPU光栅化算法的结合。 是基于Splatting和机器学习的三维重建方法  无深度学习 简单的机器学习  大量的 CG 复杂的线性代数 对 GPU 的高性能编程     ◦ 数学建模：每个高斯基元像是一个“带有颜色的半透明椭球体”，由中心位置（μ）、协方差矩阵（Σ，定义形状和方向）、不透明度（α）以及颜色（通过球谐函数 SH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高斯泼溅技术">
+<meta property="og:url" content="https://blog.tanzicai.top/2026/01/07/%E9%AB%98%E6%96%AF%E6%B3%BC%E6%BA%85%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="小谭的部落阁">
+<meta property="og:description" content="技术解释和底层技术 3DGS的原理是基于对高斯基元的数学建模和高效的 GPU光栅化算法的结合。 是基于Splatting和机器学习的三维重建方法  无深度学习 简单的机器学习  大量的 CG 复杂的线性代数 对 GPU 的高性能编程     ◦ 数学建模：每个高斯基元像是一个“带有颜色的半透明椭球体”，由中心位置（μ）、协方差矩阵（Σ，定义形状和方向）、不透明度（α）以及颜色（通过球谐函数 SH">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.tanzicai.top/typora/2026/01/07/695e12c4975f9.png">
+<meta property="og:image" content="https://image.tanzicai.top/typora/2026/01/07/695e1144f23aa.png">
+<meta property="og:image" content="https://image.tanzicai.top/typora/2026/01/07/695e1051e9053.png">
+<meta property="og:image" content="https://image.tanzicai.top/typora/2026/01/07/695e11040dd2b.png">
+<meta property="article:published_time" content="2026-01-07T07:26:50.000Z">
+<meta property="article:modified_time" content="2026-02-03T06:37:29.912Z">
+<meta property="article:author" content="tanzicai">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://image.tanzicai.top/typora/2026/01/07/695e12c4975f9.png">
+  
+  
+  
+  <title>高斯泼溅技术 - 小谭的部落阁</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"blog.tanzicai.top","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="高斯泼溅技术"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-01-07 15:26" pubdate>
+          2026年1月7日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">高斯泼溅技术</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="技术解释和底层技术"><a href="#技术解释和底层技术" class="headerlink" title="技术解释和底层技术"></a>技术解释和底层技术</h2><blockquote>
+<p><strong>3DGS的原理是基于对高斯基元的数学建模和高效的 GPU光</strong>栅化算法的结合。</p>
+<p>是基于Splatting和机器学习的三维重建方法</p>
+<ul>
+<li>无深度学习</li>
+<li>简单的机器学习 </li>
+<li>大量的 CG</li>
+<li>复杂的线性代数</li>
+<li>对 GPU 的高性能编程</li>
+</ul>
+</blockquote>
+<p>  ◦ <strong>数学建模</strong>：每个高斯基元像是一个“带有颜色的半透明椭球体”，由中心位置（<em>μ</em>）、协方差矩阵（Σ，定义形状和方向）、不透明度（<em>α</em>）以及颜色（通过球谐函数 SH 系数建模，以捕捉视角相关的光影变化）组成。</p>
+<p>  ◦ <strong>协方差分解</strong>：为确保物理有效性，协方差矩阵被分解为旋转矩阵 <em>R</em>（四元数）和缩放矩阵 <em>S</em>，即 Σ&#x3D;<em>RS<strong>S</strong>T<strong>R</strong>T</em>。</p>
+<p>  ◦ <strong>渲染流水线</strong>：核心在于<strong>可微分光栅化</strong>。它将3D高斯基元投影到2D图像平面上，形成椭圆区域（即“泼溅”过程），随后利用基于图块（Tile-based）的 Alpha 混合技术进行深度排序并合成像素颜色。</p>
+<p>  ◦ <strong>自适应密度控制</strong>：在训练中，系统会动态地对高斯集合进行致密化（对梯度大的区域进行克隆或分裂）和修剪（移除透明或尺寸异常的基元），使模型从稀疏点云逐渐“生长”出精细结</p>
+<p><img src="https://image.tanzicai.top/typora/2026/01/07/695e12c4975f9.png" srcset="/img/loading.gif" lazyload alt="image-20260107160045681"></p>
+<h2 id="详细技术"><a href="#详细技术" class="headerlink" title="详细技术"></a>详细技术</h2><h4 id="Splatting是什么（把雪球打在墙上）"><a href="#Splatting是什么（把雪球打在墙上）" class="headerlink" title="Splatting是什么（把雪球打在墙上）"></a>Splatting是什么（把雪球打在墙上）</h4><p>Splatting：一种体渲染的方法，从3D物体渲染到2D平面</p>
+<ul>
+<li><p>Ray-casting是被动的（NeRF）：计算出每个像素点受到发光粒子的影响来生成图像</p>
+</li>
+<li><p>Splatting是主动的：计算出每个发光粒子如何影响像素点。</p>
+</li>
+</ul>
+<p>过程：</p>
+<ol>
+<li>选择【雪球】<ol>
+<li>点云是空间上带有位置信息的一些孤立的点，没有体积，形状、大小；可以选择高斯椭圆、正方形、圆</li>
+<li>这个技术选择的是高斯椭圆，高斯概率在高维的时候是一个实心椭球体</li>
+</ol>
+</li>
+<li>拋掷雪球：从3D投影到2D，得到足迹<img src="https://image.tanzicai.top/typora/2026/01/07/695e1144f23aa.png" srcset="/img/loading.gif" lazyload alt="image-20260107155435094"></li>
+<li>观测变换：从世界坐标系到相机坐标系</li>
+<li>投影变换：正交投影，与z无关，无深度，透视投影，与z相关，有深度<img src="https://image.tanzicai.top/typora/2026/01/07/695e1051e9053.png" srcset="/img/loading.gif" lazyload alt="image-20260107155032500"></li>
+<li>视口变换：把二维平面坐标缩放到像素网格</li>
+<li>光栅化：连续空间到离散空间的采样<img src="https://image.tanzicai.top/typora/2026/01/07/695e11040dd2b.png" srcset="/img/loading.gif" lazyload alt="image-20260107155333678"></li>
+<li>加以合成，形成最后的图像</li>
+</ol>
+<h2 id="发展历程"><a href="#发展历程" class="headerlink" title="发展历程"></a>发展历程</h2><p>• <strong>传统阶段</strong>：长期使用**摄影测量（Photogrammetry）**技术，通过特征匹配和三角测量构建点云和网格模型。</p>
+<p>• <strong>神经渲染阶段（2020-2022）</strong>：**神经辐射场（NeRF）**的出现革新了场景表示，通过隐式连续函数实现高质量新视角合成，但受限于密集的神经网络查询，渲染速度慢且训练耗时。</p>
+<p>• <strong>3DGS 时代（2023至今）</strong>：2023年由 Kerbl 等人提出。它抛弃了 NeRF 的神经网络查询，转而使用显式的高斯函数和光栅化技术，将渲染速度提升至实时级别（&gt;30 FPS），并将训练时间从数天缩短至数十分钟。</p>
+<h3 id="现阶段难题"><a href="#现阶段难题" class="headerlink" title="现阶段难题"></a>现阶段难题</h3><p>尽管 3DGS 优势显著，但仍面临以下挑战：</p>
+<p>• <strong>存储与显存开销</strong>：大规模场景会产生数千万个高斯点，占用数 GB 甚至数十 GB 的内存空间。</p>
+<p>• <strong>几何结构缺失</strong>：由于 3DGS 是纯图形学表示，缺乏明确的顶点、边和面（网格），难以直接用于物理碰撞检测或精确的几何编辑。</p>
+<p>• <strong>材质建模不足</strong>：对复杂材质（如镜面反射）和动态光照条件的模拟精度仍有待提高。</p>
+<p>• <strong>伪影问题</strong>：在输入图像有限或背景分辨率较低时，容易出现“爆裂”（popping）现象或悬浮伪影。</p>
+<h2 id="适用方向"><a href="#适用方向" class="headerlink" title="适用方向"></a>适用方向</h2><ul>
+<li><strong>虚拟漫游与数字化身</strong>：创建高度真实的学校、博物馆或城市的“数字孪生”。</li>
+<li><strong>远程协作与视频会议</strong>：通过 3D 环境提供超越 2D 界面的沉浸感，使参与者仿佛身处同一空间。</li>
+</ul>
+<p>• <strong>航拍建模与 GIS</strong>：结合民用无人机快速生成大范围城市或地形的高保真模型。</p>
+<p>• <strong>电影与游戏资产</strong>：作为虚拟背景或高质量 3D 内容生成的底层技术</p>
+<h2 id="技术对比：3DGS-vs-虚拟展厅-WebGL-Three-js-vs-720-全景"><a href="#技术对比：3DGS-vs-虚拟展厅-WebGL-Three-js-vs-720-全景" class="headerlink" title="技术对比：3DGS vs. 虚拟展厅 (WebGL&#x2F;Three.js) vs. 720 全景"></a>技术对比：3DGS vs. 虚拟展厅 (WebGL&#x2F;Three.js) vs. 720 全景</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>3D 高斯泼溅 (3DGS)</th>
+<th>虚拟展厅 (WebGL&#x2F;Three.js 网格)</th>
+<th>720 全景技术</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>表示方式</strong></td>
+<td>显式高斯基元（点云状）</td>
+<td>结构化多边形网格（Mesh）</td>
+<td>球面全景投影（2D 图像）</td>
+</tr>
+<tr>
+<td><strong>视觉效果</strong></td>
+<td><strong>照片级真实感</strong>，能完美还原复杂光影和半透明材质</td>
+<td>依赖贴图和光照计算，实时渲染下常有“合成感”</td>
+<td>真实感取决于原片，但视角受限，缺乏视差感</td>
+</tr>
+<tr>
+<td><strong>交互性</strong></td>
+<td>支持<strong>自由路径移动</strong>，视角平滑连续</td>
+<td>支持碰撞检测和物体交互，逻辑控制成熟</td>
+<td>通常只能在预定点位跳转，视角切换非空间移动</td>
+</tr>
+<tr>
+<td><strong>性能消耗</strong></td>
+<td>对 GPU 要求较高，显存占用大</td>
+<td>经过 LOD 优化后对中低端硬件更友好</td>
+<td>极低，普通移动端即可流畅运行</td>
+</tr>
+<tr>
+<td><strong>编辑难度</strong></td>
+<td>难以精确编辑几何形状（如改动墙面）</td>
+<td><strong>极易编辑</strong>，支持在各类 3D 软件中操作</td>
+<td>无法进行三维编辑，仅能修改像素</td>
+</tr>
+</tbody></table>
+<h2 id="核心优势"><a href="#核心优势" class="headerlink" title="核心优势"></a>核心优势</h2><ul>
+<li><strong>实时性与高保真平衡</strong>：在保持 NeRF 级画质的同时，实现了<strong>超实时渲染（&gt;100 FPS）</strong>，移除了对高端 VR 头显的依赖，仅靠浏览器即可运行。</li>
+</ul>
+<p>• <strong>训练高效</strong>：训练周期从传统神经渲染的数小时&#x2F;天缩短至几十分钟。</p>
+<p>• <strong>采集简便</strong>：支持利用手机或普通摄像头采集 2D 数据并快速生成高质量 3D 场景。</p>
+<p>• <strong>浏览器友好</strong>：通过 Three.js 包装器或专门的渲染引擎（如 PlayCanvas），可轻松集成到 WebGL 网页中，实现跨平台部署。</p>
+<blockquote>
+<p> <strong>形象比喻</strong>： 如果把<strong>720全景</strong>比作一张只能站在圆心看的全方位贴画，**虚拟展厅（网格）**<strong>高斯泼溅</strong>就像是一团由无数个“带有颜色和透明度的云朵”汇聚而成的幻影——它看起来几乎和现实一模一样，你可以穿梭其中，但当你试图去推一下它的墙壁时，你会发现它并没有实体的砖块。</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>高斯泼溅技术</div>
+      <div>https://blog.tanzicai.top/2026/01/07/高斯泼溅技术/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>tanzicai</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年1月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/12/26/CUPS%EF%BC%9A%E5%85%B1%E4%BA%AB%E6%89%93%E5%8D%B0%E6%9C%BA%E6%9C%8D%E5%8A%A1/" title="CUPS：共享打印机服务">
+                        <span class="hidden-mobile">CUPS：共享打印机服务</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
